@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="rwad:VendorDatalist" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+<description>Invoice</description>
+	<author>Craig Nelson</author>
+	<version>1.0</version>
+	<imports>
+		 <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+	    <import uri="http://www.alfresco.org/model/datalist/1.0" prefix="dl" />
+	</imports>
+	<namespaces>
+		<namespace uri="http://www.redwingaero.com/datalist/1.0" prefix="rwad" />
+	</namespaces>
+     
+	<types>
+	  <type name="rwad:VendorDatalist">
+	   	 <title>VendorDatalist</title>
+		 <parent>dl:dataListItem</parent>
+			<properties>
+				<property name="rwad:VendorId">
+					<title>Vendor ID</title>
+					<type>d:text</type>
+				</property>
+				<property name="rwad:VendorName">
+					<title>Vendor Name</title>
+					<type>d:text</type>
+				</property>
+				<property name="rwad:VendorAddress">
+					<title>Vendor Address</title>
+					<type>d:text</type>
+				</property>
+			</properties>
+	   </type>
+	</types>
+</model>

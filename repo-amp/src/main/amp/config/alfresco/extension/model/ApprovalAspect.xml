@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="apr:Approval" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+<description>Invoice</description>
+	<author>Craig Nelson</author>
+	<version>1.0</version>
+	<imports>
+		 <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+	</imports>
+	<namespaces>
+		<namespace uri="http://www.redwingaero.com/approval/1.0" prefix="apr" />
+	</namespaces>
+	
+	<constraints>
+    	<constraint name="apr:approvalDropDown" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value></value>
+                    <value>Pending Approval</value>
+                    <value>Approved</value>
+                </list>
+            </parameter>
+        </constraint>
+    </constraints>
+
+	 <aspects>
+		<aspect name="apr:Approval">
+			<title>Approval</title>
+			<properties>
+				<property name="apr:ApprovalStatus">
+					<title>Approval Status</title>
+					<type>d:text</type>
+					<constraints>
+                        <constraint ref="apr:approvalDropDown" />
+                    </constraints>
+				</property>	
+			</properties>
+		</aspect>
+	</aspects>
+</model>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="rwa:Invoice" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+<description>Invoice</description>
+	<author>Craig Nelson</author>
+	<version>1.0</version>
+	<imports>
+		 <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+	</imports>
+	<namespaces>
+		<namespace uri="http://www.redwingaero.com/link/myfilefile/1.0" prefix="rwa" />
+	</namespaces>
+	
+	<constraints>
+    	<constraint name="rwa:FETRateList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value></value>
+                    <value>24.40</value>
+                    <value>21.90</value>
+                </list>
+            </parameter>
+        </constraint>
+        <constraint name="rwa:AuditStatusList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value></value>
+                    <value>Pending</value>
+                    <value>Discrepancy</value>
+                    <value>Complete</value>
+                </list>
+            </parameter>
+        </constraint>
+        <constraint name="rwa:FETRefundList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value></value>
+                    <value>Pending</value>
+                    <value>Submitted</value>
+                </list>
+            </parameter>
+        </constraint>
+        <constraint name="rwa:POMatchStatusList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                     <value></value>               
+                    <value>Pending</value>
+                    <value>Complete</value>
+                </list>
+            </parameter>
+        </constraint>
+        <constraint name="rwa:PaymentStatusList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value></value>
+                    <value>Pending</value>
+                    <value>Complete</value>
+                </list>
+            </parameter>
+        </constraint>
+        <constraint name="rwa:VendorIDList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value></value>
+                    <value>VendorID1</value>
+                    <value>VendorID2</value>
+                </list>
+            </parameter>
+        </constraint>
+         <constraint name="rwa:VendorNameList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                     <value></value>
+                    <value>VendorName1</value>
+                    <value>VendorName2</value>
+                </list>
+            </parameter>
+        </constraint>
+         <constraint name="rwa:InvoiceTypeList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value></value>
+                    <value>Fuel</value>
+                    <value>Non-Fuel</value>
+                    <value>Un-Marked</value>  
+                </list>
+            </parameter>
+        </constraint>
+    </constraints>
+    
+     
+	<types>
+	  <type name="rwa:Invoice">
+	   	 <title>Invoice</title>
+		 <parent>cm:content</parent>
+			<properties>
+				<property name="rwa:VendorId">
+					<title>Vendor ID</title>
+					<type>d:text</type>
+					<constraints>
+                        <constraint ref="rwa:VendorIDList" />
+                    </constraints>
+				</property>
+				<property name="rwa:VendorName">
+					<title>Vendor Name</title>
+					<type>d:text</type>
+					<constraints>
+                        <constraint ref="rwa:VendorNameList" />
+                    </constraints>
+				</property>
+				<property name="rwa:StatementDate">
+					<title>Statement Date</title>
+					<type>d:date</type>
+				</property>
+				<property name="rwa:InvoiceNumber">
+					<title>Invoice Number</title>
+					<type>d:text</type>
+				</property>
+				<property name="rwa:InvoiceDate">
+					<title>Invoice Date</title>
+					<type>d:date</type>
+				</property>
+				<property name="rwa:PurchaseOrderNumber">
+					<title>Purchase Order Number</title>
+					<type>d:text</type>
+				</property>
+				<property name="rwa:InvoiceAmountDue">
+					<title>Invoice Amount Due</title>
+					<type>d:double</type>
+				</property>
+				<property name="rwa:DateStamp">
+					<title>DateStamp</title>
+					<type>d:date</type>
+				</property>
+				<property name="rwa:InvoiceType">
+					<title>Invoice Type</title>
+					<type>d:text</type>
+					<default>Un-Marked</default>
+					<constraints>
+                        <constraint ref="rwa:InvoiceTypeList" />
+                    </constraints>
+				</property>
+				<property name="rwa:PaymentStatus">
+					<title>Payment Status</title>
+					<type>d:text</type>
+					<default>Pending</default>
+					<constraints>
+                        <constraint ref="rwa:PaymentStatusList" />
+                    </constraints>
+				</property>
+			</properties>
+	   </type>
+	</types>
+	 <aspects>
+		<aspect name="rwa:FuelInvoice">
+			<title>Fuel Invoice</title>
+			<properties>
+				<property name="rwa:AuditStatus">
+					<title>Audit Status</title>
+					<type>d:text</type>
+					<default>Pending</default>
+					<constraints>
+                        <constraint ref="rwa:AuditStatusList" />
+                    </constraints>
+				</property>
+				<property name="rwa:FETRate">
+				    <title>FET Rate</title>
+					<type>d:text</type>
+					<constraints>
+                        <constraint ref="rwa:FETRateList" />
+                    </constraints>
+				</property>
+				<property name="rwa:FETRefund">
+					<title>FET Refund</title>
+					<type>d:text</type>
+					<constraints>
+                        <constraint ref="rwa:FETRefundList" />
+                    </constraints>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="rwa:NonFuelInvoice">
+			<title>Non-Fuel Invoice</title>
+			<properties>
+				<property name="rwa:POMatchStatus">
+					<title>PO Match Status</title>
+					<type>d:text</type>
+					<default>Pending</default>
+					<constraints>
+                        <constraint ref="rwa:POMatchStatusList" />
+                    </constraints>
+				</property>
+			</properties>
+		</aspect>
+	</aspects>
+</model>

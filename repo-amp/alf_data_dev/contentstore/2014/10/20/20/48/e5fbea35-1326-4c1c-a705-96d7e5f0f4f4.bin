@@ -1,0 +1,37 @@
+
+var vendorId = document.properties["rwa:VendorId"];
+var vendorName = document.properties["rwa:VendorName"];
+var vendorNameFirstLetter = vendorName.substring(0,1).toUpperCase();
+var filingLocation = ["Sites", "documentLibrary", "Invoice", vendorNameFirstLetter, vendorName];
+
+setProjectFile(document, filingLocation);
+
+
+function setProjectFile(document, filingLocation){
+
+var arrayLength = filingLocation.length;
+var destination = companyhome;
+
+for (var i =0; i < arrayLength; i++){
+		destination = destination.childByNamePath(filingLocation[i]);
+		if (destination == null){
+			destination = companyhome.createFolder(filingLocation[i]);
+		}
+	}
+	document.move(destination);
+	document.save();
+}
+
+
+function log(varString){
+var logFile = companyhome.childByNamePath("log.txt");
+
+if (logFile == null)
+{
+   logFile = companyhome.createFile("log.txt");
+}
+if (logFile != null)
+   {
+     logFile.content +=  varString +"\n";
+   }
+}
