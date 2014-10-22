@@ -8,8 +8,11 @@
             <list>
             	<value>alfresco/extension/model/ApprovalAspect.xml</value>
 				<value>alfresco/extension/model/Accounting.xml</value>
-            	<value>alfresco/extension/dataLists/Vendor.xml</value>
+            	<value>alfresco/extension/dataLists/VendorDatalist.xml</value>
             </list>
         </property>
+    </bean>
+    <bean id="webscript.com.redwingaero.picklist.picklist.get" class="com.redwingaero.webscript.PicklistWebscript"  parent="webscript">
+        <property name="serviceRegistry" ref="ServiceRegistry" />
     </bean>
 </beans>

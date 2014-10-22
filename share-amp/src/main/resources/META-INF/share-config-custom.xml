@@ -212,7 +212,13 @@
 			    <show id="rwad:VendorName"/> 
                 <show id="rwad:VendorAddress"/> 
 			</field-visibility>
-			<create-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+			<appearance>
+				<field id="rwad:VendorName">
+					<control template="/form-controls/dynamic-dropdown.ftl">
+						<control-param name="picklistName">VendorDatalist</control-param>
+					</control>
+				</field>
+			</appearance>
 		</form>
 	</forms>
 </config>
