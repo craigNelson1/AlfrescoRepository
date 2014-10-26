@@ -1,264 +1,297 @@
 <alfresco-config>
-   <!-- Document Library config section -->
-   <config evaluator="string-compare" condition="DocumentLibrary">
-      <!--
-         Used by the "Manage Aspects" action
+	<!-- Document Library config section -->
+	<config>
+		<forms>
+			<dependencies>
+				<js src="/js/DynamicDropdown.js" />
+			</dependencies>
+		</forms>
+	</config>
 
-         For custom aspects, remember to also add the relevant i18n string(s)
-            cm_myaspect=My Aspect
-      -->
-    <aspects>
-         <!-- Aspects that a user can see -->
-         <visible>
-            <aspect name="rwa:FuelInvoice" />
-            <aspect name="rwa:NonFuelInvoice" /> 
-            <aspect name="apr:Approval" />                            
-         </visible>
+	<config evaluator="string-compare" condition="DocumentLibrary">
+		<!-- Used by the "Manage Aspects" action For custom aspects, remember to 
+			also add the relevant i18n string(s) cm_myaspect=My Aspect -->
+		<aspects>
+			<!-- Aspects that a user can see -->
+			<visible>
+				<aspect name="rwa:FuelInvoice" />
+				<aspect name="rwa:NonFuelInvoice" />
+				<aspect name="apr:Approval" />
+			</visible>
 
-         <!-- Aspects that a user can add. Same as "visible" if left empty -->
-         <addable>
-         </addable>
+			<!-- Aspects that a user can add. Same as "visible" if left empty -->
+			<addable>
+			</addable>
 
-         <!-- Aspects that a user can remove. Same as "visible" if left empty -->
-         <removeable>
-         </removeable>
-      </aspects>
-      <!--
-         Used by the "Change Type" action
+			<!-- Aspects that a user can remove. Same as "visible" if left empty -->
+			<removeable>
+			</removeable>
+		</aspects>
+		<!-- Used by the "Change Type" action Define valid subtypes using the following 
+			example: <type name="cm:content"> <subtype name="cm:mysubtype" /> </type> 
+			Remember to also add the relevant i18n string(s): cm_mysubtype=My SubType -->
+		<types>
+			<type name="cm:content">
+				<subtype name="rwa:Invoice" />
+			</type>
+		</types>
+	</config>
 
-         Define valid subtypes using the following example:
-            <type name="cm:content">
-               <subtype name="cm:mysubtype" />
-            </type>
+	<config replace="true" evaluator="string-compare" condition="AdvancedSearch">
+		<advanced-search>
+			<!-- Forms for the advanced search type list -->
+			<forms>
+				<!-- The 'form' config element contains the name of the model type of 
+					the form to display. The element supports the following optional attributes: 
+					id = form id, the id of "search" will be assumed if not set label = label 
+					text to display - defaults to model type if not set labelId = I18N message 
+					id of label text to display description = description text to display descriptionId 
+					= I18N message id of description text to display -->
+				<form labelId="search.form.label.cm_content" descriptionId="search.form.desc.cm_content">cm:content
+				</form>
+				<form labelId="search.form.label.cm_folder" descriptionId="search.form.desc.cm_folder">cm:folder
+				</form>
+				<form labelId="search.form.label.rwa_invoice" label="Invoice"
+					descriptionId="search.form.desc.rwa_invoice" description="Red Wing Aero Invoices">rwa:Invoice
+				</form>
+			</forms>
+		</advanced-search>
+	</config>
 
-         Remember to also add the relevant i18n string(s):
-            cm_mysubtype=My SubType
-      -->
-      <types>
-       <type name="cm:content">
-               <subtype name="rwa:Invoice" />
-        </type>
-      </types>
-   </config>
-   
-   <config replace="true" evaluator="string-compare" condition="AdvancedSearch">
-      <advanced-search>
-         <!-- Forms for the advanced search type list -->
-         <forms>
-            <!--
-               The 'form' config element contains the name of the model type
-               of the form to display.
-               
-               The element supports the following optional attributes:
-                  id = form id, the id of "search" will be assumed if not set
-                  label = label text to display - defaults to model type if not set
-                  labelId = I18N message id of label text to display
-                  description = description text to display
-                  descriptionId = I18N message id of description text to display
-            -->
-            <form labelId="search.form.label.cm_content" descriptionId="search.form.desc.cm_content">cm:content</form>
-            <form labelId="search.form.label.cm_folder" descriptionId="search.form.desc.cm_folder">cm:folder</form>            
-            <form labelId="search.form.label.rwa_invoice" label="Invoice" descriptionId="search.form.desc.rwa_invoice" description="Red Wing Aero Invoices">rwa:Invoice</form>            
-         </forms>
-      </advanced-search>
-   </config>
-   
-   <config evaluator="model-type" condition="rwa:Invoice">
-	<forms>
-         <!-- Search form -->
-		<form id="search">
-			<field-visibility>
-				<show id="cm:name" />
-				<show id="cm:description" />
-				<show id="rwa:VendorId" /> 
-			    <show id="rwa:VendorName"/> 
-                <show id="rwa:StatementDate"/> 	
-                <show id="rwa:InvoiceNumber"/> 	
-				<show id="rwa:InvoiceDate" />				
-				<show id="rwa:PurchaseOrderNumber"/> 		
-                <show id="rwa:InvoiceAmountDue"/> 		
-                <show id="rwa:DateStamp"/> 
-                <show id="rwa:InvoiceType"/> 
-                <show id="rwa:PaymentStatus"/>  
-                <show id="rwa:AuditStatus" />
-                <show id="rwa:FETRate" />
-                <show id="rwa:FETRefund" />
-                <show id="rwa:POMatchStatus" />
-			</field-visibility>
-            <appearance>
-			   <field id="rwa:FETRate" label="FET Rate">
-				      <control template="/org/alfresco/components/form/controls/selectone.ftl">
-				         <control-param name="options">,24.40,21.90</control-param>
-				      </control>
-               </field>
-               
-                <field id="rwa:FETRefund" label="FET Refund">
-				      <control template="/org/alfresco/components/form/controls/selectone.ftl">
-				         <control-param name="options">,Pending,Submitted</control-param>
-				      </control>
-               </field>
-			    <field id="rwa:POMatchStatus" label="PO Match Status">
-				      <control template="/org/alfresco/components/form/controls/selectone.ftl">
-				         <control-param name="options">,Pending,Complete</control-param>
-				      </control>
-               </field>    
-			   <field id="rwa:AuditStatus" label="Audit Status">
-				      <control template="/org/alfresco/components/form/controls/selectone.ftl">
-				         <control-param name="options">,Pending,Discrepancy,Complete</control-param>
-				      </control>
-               </field>          
-			 </appearance>         
-		</form>
-    </forms>
- </config>
-   
-   <config evaluator="node-type" condition="rwa:Invoice">
-	<forms>
-		<form>
-			<field-visibility>
-				<show id="cm:name" />
-				<show id="cm:description" force="true" />
-				<show id="rwa:VendorId" /> 
-			    <show id="rwa:VendorName"/> 
-                <show id="rwa:StatementDate"/> 	
-                <show id="rwa:InvoiceNumber"/> 	
-				<show id="rwa:InvoiceDate" />				
-				<show id="rwa:PurchaseOrderNumber"/> 		
-                <show id="rwa:InvoiceAmountDue"/> 		
-                <show id="rwa:DateStamp" for-mode="view"/> 
-                <show id="rwa:InvoiceType"/> 
-                <show id="rwa:PaymentStatus"/>  
-                <show id="rwa:AuditStatus" />
-                <show id="rwa:FETRate" />
-                <show id="rwa:FETRefund" />
-                <show id="rwa:POMatchStatus" />
-				<show id="cm:title" for-mode="view" />
-				<show id="cm:author" for-mode="view" />
-				<show id="cm:modified" for-mode="view" />
-				<show id="cm:creator" for-mode="view" />
-				<show id="cm:created" for-mode="view" />
-				<show id="cm:modifier" for-mode="view" />
-				<show id="cm:modified" for-mode="view" />
-				<hide id="mimetype" />
-				<hide id="size" for-mode="view" />
-				<show id="cm:created" for-mode="view" />
-				<show id="cm:creator" for-mode="view" />
-				<show id="cm:taggable" for-mode="edit"  />
-			</field-visibility>
-			<appearance>			
-				<field id="cm:taggable">
-					<control>
-						<control-param name="compactMode">true</control-param>
-						<control-param name="params">aspect=cm:taggable</control-param>
-						<control-param name="createNewItemUri">/api/tag/workspace/SpacesStore</control-param>
-						<control-param name="createNewItemIcon">tag</control-param>
-					</control>
-				</field>
-				<field id="rwa:InvoiceAmountDue">
-				      <control template="/org/alfresco/components/form/controls/currency.ftl">
-				      </control>
-               </field>
-				<field id="rwa:FETRate" label="FET Rate">
-				      <control template="/org/alfresco/components/form/controls/selectone.ftl">
-				         <control-param name="options">,24.40,21.90</control-param>
-				      </control>
-               </field>
-               
-                <field id="rwa:FETRefund" label="FET Refund">
-				      <control template="/org/alfresco/components/form/controls/selectone.ftl">
-				         <control-param name="options">Pending,Submitted</control-param>
-				      </control>
-               </field>
-			    <field id="rwa:POMatchStatus" label="PO Match Status">
-				      <control template="/org/alfresco/components/form/controls/selectone.ftl">
-				         <control-param name="options">Pending,Complete</control-param>
-				      </control>
-               </field>    
-			   <field id="rwa:AuditStatus" label="Audit Status">
-				      <control template="/org/alfresco/components/form/controls/selectone.ftl">
-				         <control-param name="options">Pending,Discrepancy,Complete</control-param>
-				      </control>
-               </field>          
-			</appearance>
-		</form>
-	</forms>
-</config>
-   
- <config evaluator="model-type" condition="rwad:VendorDatalist">
-	<forms>
-		<form>
-			<field-visibility>
-				<show id="rwad:VendorId" /> 
-			    <show id="rwad:VendorName"/> 
-                <show id="rwad:VendorAddress"/> 
-			</field-visibility>
-			<create-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
-		</form>
-		<form id="datagrid">
-			<field-visibility>
-				<show id="rwad:VendorId" /> 
-			    <show id="rwad:VendorName"/> 
-                <show id="rwad:VendorAddress"/> 
-			</field-visibility>
-		</form>
-	</forms>
-</config>
-   
-   <config evaluator="node-type" condition="rwad:VendorDatalist">
-	<forms>
-		<form>
-			<field-visibility>
-				<show id="rwad:VendorId" /> 
-			    <show id="rwad:VendorName"/> 
-                <show id="rwad:VendorAddress"/> 
-			</field-visibility>
-			<appearance>
-				<field id="rwad:VendorName">
-					<control template="/form-controls/dynamic-dropdown.ftl">
-						<control-param name="picklistName">VendorDatalist</control-param>
-					</control>
-				</field>
-			</appearance>
-		</form>
-	</forms>
-</config>
-   
-   
-     <config evaluator="aspect" condition="rwa:FuelInvoice">
-	   <forms>
-	      <form>
-	         <field-visibility>
-                <show id="rwa:AuditStatus" />
-                <show id="rwa:FETRate" />
-                <show id="rwa:FETRefund" />
-	         </field-visibility>	        
-	      </form>
-	   </forms>
-    </config>
-    
-    <config evaluator="aspect" condition="rwa:NonFuelInvoice">
-	   <forms>
-	      <form>
-	         <field-visibility>
-                <show id="rwa:POMatchStatus" />
-	         </field-visibility>	        
-	      </form>
-	   </forms>
-    </config>
-    
-    <config evaluator="aspect" condition="apr:Approval">
-	   <forms>
-	      <form>
-	         <field-visibility>
-                <show id="apr:ApprovalStatus" />
-	         </field-visibility>	        
-	       <appearance>	
-		     <field id="apr:ApprovalStatus">
-		    	 <control template="/org/alfresco/components/form/controls/approvalSelectone.ftl" >   		
-		     	 </control>
-               </field>
-		    </appearance>
-	      </form>
-	   </forms>
-    </config>
+	<config evaluator="model-type" condition="rwa:Invoice">
+		<forms>
+			<!-- Search form -->
+			<form id="search">
+				<field-visibility>
+					<show id="cm:name" />
+					<show id="cm:description" />
+					<show id="rwa:VendorId" />
+					<show id="rwa:VendorName" />
+					<show id="rwa:StatementDate" />
+					<show id="rwa:InvoiceNumber" />
+					<show id="rwa:InvoiceDate" />
+					<show id="rwa:PurchaseOrderNumber" />
+					<show id="rwa:InvoiceAmountDue" />
+					<show id="rwa:DateStamp" />
+					<show id="rwa:InvoiceType" />
+					<show id="rwa:PaymentStatus" />
+					<show id="rwa:AuditStatus" />
+					<show id="rwa:FETRate" />
+					<show id="rwa:FETRefund" />
+					<show id="rwa:POMatchStatus" />
+				</field-visibility>
+				<appearance>
+					<field id="rwa:FETRate" label="FET Rate">
+						<control template="/org/alfresco/components/form/controls/selectone.ftl">
+							<control-param name="options">,24.40,21.90</control-param>
+						</control>
+					</field>
+					<field id="rwa:VendorId" label="Vendor Id">
+						<control
+							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
+							<control-param name="siteName">vendorlist</control-param>
+							<control-param name="dataListName">vendorlist</control-param>
+							<control-param name="fieldname">VendorId</control-param>
+						</control>
+					</field>
+
+					<field id="rwa:FETRefund" label="FET Refund">
+						<control template="/org/alfresco/components/form/controls/selectone.ftl">
+							<control-param name="options">,Pending,Submitted
+							</control-param>
+						</control>
+					</field>
+					<field id="rwa:POMatchStatus" label="PO Match Status">
+						<control template="/org/alfresco/components/form/controls/selectone.ftl">
+							<control-param name="options">,Pending,Complete
+							</control-param>
+						</control>
+					</field>
+					<field id="rwa:AuditStatus" label="Audit Status">
+						<control template="/org/alfresco/components/form/controls/selectone.ftl">
+							<control-param name="options">,Pending,Discrepancy,Complete
+							</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="node-type" condition="rwa:Invoice">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="cm:name" />
+					<show id="cm:description" force="true" />
+					<show id="rwa:VendorId" />
+					<show id="rwa:VendorName" />
+					<show id="rwa:StatementDate" />
+					<show id="rwa:InvoiceNumber" />
+					<show id="rwa:InvoiceDate" />
+					<show id="rwa:PurchaseOrderNumber" />
+					<show id="rwa:InvoiceAmountDue" />
+					<show id="rwa:DateStamp" for-mode="view" />
+					<show id="rwa:InvoiceType" />
+					<show id="rwa:PaymentStatus" />
+					<show id="rwa:AuditStatus" />
+					<show id="rwa:FETRate" />
+					<show id="rwa:FETRefund" />
+					<show id="rwa:POMatchStatus" />
+					<show id="cm:title" for-mode="view" />
+					<show id="cm:author" for-mode="view" />
+					<show id="cm:modified" for-mode="view" />
+					<show id="cm:creator" for-mode="view" />
+					<show id="cm:created" for-mode="view" />
+					<show id="cm:modifier" for-mode="view" />
+					<show id="cm:modified" for-mode="view" />
+					<hide id="mimetype" />
+					<hide id="size" for-mode="view" />
+					<show id="cm:created" for-mode="view" />
+					<show id="cm:creator" for-mode="view" />
+					<show id="cm:taggable" for-mode="edit" />
+				</field-visibility>
+				<appearance>
+					<field id="rwa:VendorId" label="Vendor Id">
+						<control
+							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
+							<control-param name="siteName">vendorlist</control-param>
+							<control-param name="dataListName">vendorlist</control-param>
+							<control-param name="fieldname">VendorId</control-param>
+						</control>
+					</field>
+
+					<field id="rwa:VendorName" label="Vendor Name">
+						<control
+							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
+							<control-param name="siteName">vendorlist</control-param>
+							<control-param name="dataListName">vendorlist</control-param>
+							<control-param name="fieldname">VendorName</control-param>
+						</control>
+					</field>
+
+
+					<field id="cm:taggable">
+						<control>
+							<control-param name="compactMode">true</control-param>
+							<control-param name="params">aspect=cm:taggable
+							</control-param>
+							<control-param name="createNewItemUri">/api/tag/workspace/SpacesStore
+							</control-param>
+							<control-param name="createNewItemIcon">tag</control-param>
+						</control>
+					</field>
+					<field id="rwa:InvoiceAmountDue">
+						<control template="/org/alfresco/components/form/controls/currency.ftl">
+						</control>
+					</field>
+					<field id="rwa:FETRate" label="FET Rate">
+						<control template="/org/alfresco/components/form/controls/selectone.ftl">
+							<control-param name="options">,24.40,21.90</control-param>
+						</control>
+					</field>
+
+					<field id="rwa:FETRefund" label="FET Refund">
+						<control template="/org/alfresco/components/form/controls/selectone.ftl">
+							<control-param name="options">Pending,Submitted
+							</control-param>
+						</control>
+					</field>
+					<field id="rwa:POMatchStatus" label="PO Match Status">
+						<control template="/org/alfresco/components/form/controls/selectone.ftl">
+							<control-param name="options">Pending,Complete
+							</control-param>
+						</control>
+					</field>
+					<field id="rwa:AuditStatus" label="Audit Status">
+						<control template="/org/alfresco/components/form/controls/selectone.ftl">
+							<control-param name="options">Pending,Discrepancy,Complete
+							</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="model-type" condition="rwad:VendorDatalist">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="rwad:VendorId" />
+					<show id="rwad:VendorName" />
+					<show id="rwad:VendorAddress" />
+				</field-visibility>
+				<create-form
+					template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+			</form>
+			<form id="datagrid">
+				<field-visibility>
+					<show id="rwad:VendorId" />
+					<show id="rwad:VendorName" />
+					<show id="rwad:VendorAddress" />
+				</field-visibility>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="node-type" condition="rwad:VendorDatalist">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="rwad:VendorId" />
+					<show id="rwad:VendorName" />
+					<show id="rwad:VendorAddress" />
+				</field-visibility>
+				<appearance>
+					<field id="rwad:VendorName">
+						<control
+							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
+							<control-param name="picklistName">VendorDatalist</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+
+	<config evaluator="aspect" condition="rwa:FuelInvoice">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="rwa:AuditStatus" />
+					<show id="rwa:FETRate" />
+					<show id="rwa:FETRefund" />
+				</field-visibility>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="aspect" condition="rwa:NonFuelInvoice">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="rwa:POMatchStatus" />
+				</field-visibility>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="aspect" condition="apr:Approval">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="apr:ApprovalStatus" />
+				</field-visibility>
+				<appearance>
+					<field id="apr:ApprovalStatus">
+						<control
+							template="/org/alfresco/components/form/controls/approvalSelectone.ftl">
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
 </alfresco-config>

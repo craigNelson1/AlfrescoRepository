@@ -11,7 +11,7 @@ public class VendorDatalist
 {
  
     /**Value Assistance Model URI */
-    public static final String REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI = "http://www.redwingaero.com/model/rwad/1.0";
+    public static final String REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI = "http://www.redwingaero.com/datalist/1.0";
     public static final String DATALIST_MODEL_URI = "http://www.alfresco.org/model/datalist/1.0";
 
     public static final String REDWINGAERO_VALUE_ASSISTANCE_MODEL_PREFIX = "rwad";

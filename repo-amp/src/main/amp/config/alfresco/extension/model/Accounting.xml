@@ -59,24 +59,6 @@
                 </list>
             </parameter>
         </constraint>
-        <constraint name="rwa:VendorIDList" type="LIST">
-            <parameter name="allowedValues">
-                <list>
-                    <value></value>
-                    <value>VendorID1</value>
-                    <value>VendorID2</value>
-                </list>
-            </parameter>
-        </constraint>
-         <constraint name="rwa:VendorNameList" type="LIST">
-            <parameter name="allowedValues">
-                <list>
-                     <value></value>
-                    <value>VendorName1</value>
-                    <value>VendorName2</value>
-                </list>
-            </parameter>
-        </constraint>
          <constraint name="rwa:InvoiceTypeList" type="LIST">
             <parameter name="allowedValues">
                 <list>
@@ -98,16 +80,10 @@
 				<property name="rwa:VendorId">
 					<title>Vendor ID</title>
 					<type>d:text</type>
-					<constraints>
-                        <constraint ref="rwa:VendorIDList" />
-                    </constraints>
 				</property>
 				<property name="rwa:VendorName">
 					<title>Vendor Name</title>
 					<type>d:text</type>
-					<constraints>
-                        <constraint ref="rwa:VendorNameList" />
-                    </constraints>
 				</property>
 				<property name="rwa:StatementDate">
 					<title>Statement Date</title>

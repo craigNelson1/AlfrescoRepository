@@ -36,16 +36,10 @@
 	<#else>
 		new RWAD.DynamicDropdown("${fieldHtmlId}").setOptions(
 		{
-			picklistName:"${field.control.params['picklistName']}",
-			dependsOn:[
-				<#if (field.control.params['dependsOn'])??>
-					<#list (field.control.params['dependsOn'])?split(",") as dependsOn>
-						"${dependsOn}"<#if dependsOn_has_next>,</#if>
-					</#list>
-				</#if>
-			],
-			initialValue:"${fieldValue}",
-			itemId:"${(form.arguments.itemId!"")?js_string}"
+			siteName:"${field.control.params['siteName']}",
+			dataListName:"${field.control.params['dataListName']}",
+			htmlId:"${fieldHtmlId}",
+			fieldName:"${field.control.params['fieldname']}"
 		});
 	</#if>
 
@@ -107,10 +101,3 @@
 	     <@formLib.renderFieldHelp field=field />
    </#if>
 </div>
-
-<script type="text/javascript">//<![CDATA[
-(function(RWAD)
-{
-	RWAD.Dependency.registerHandler("${field.id}","${fieldHtmlId}");
-})(window.RWAD = window.RWAD || {});
-//]]></script>
