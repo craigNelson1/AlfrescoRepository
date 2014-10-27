@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.alfresco.model.ContentModel;
+import org.alfresco.repo.jscript.ChildAssociation;
 import org.alfresco.repo.transaction.RetryingTransactionHelper.RetryingTransactionCallback;
 import org.alfresco.service.ServiceRegistry;
+import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
@@ -75,7 +77,7 @@ public class PicklistWebscript extends DeclarativeWebScript {
 	protected void process(WebScriptRequest req, Map<String, Object> model)
 			throws Exception {
 		String siteName = req.getParameter(PARAM_SITE_NAME);
-		ParameterCheck.mandatoryString(PARAM_DATALIST_NAME, siteName);
+		ParameterCheck.mandatoryString(PARAM_SITE_NAME, siteName);
 		String dataListName = req.getParameter(PARAM_DATALIST_NAME);
 		ParameterCheck.mandatoryString(PARAM_DATALIST_NAME, siteName);
 
@@ -102,22 +104,11 @@ public class PicklistWebscript extends DeclarativeWebScript {
 				Map<QName, Serializable> props = serviceRegistry
 						.getNodeService().getProperties(nodeRef);
 				if (props.get(ContentModel.PROP_TITLE).equals(dataListName)) {
-					query = new StringBuffer();
-					query.append("PATH:\"app:company_home/st:sites/cm:accounting/cm:dataLists/"
-							+ props.get(ContentModel.PROP_NAME) + "/*\"");
-
-					logger.debug("Query = " + query);
-					// Set search parameters
-					searchParameters = new SearchParameters();
-					searchParameters
-							.addStore(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
-					searchParameters.setLanguage(SearchService.LANGUAGE_LUCENE);
-					searchParameters.setQuery(query.toString());
-					rs = serviceRegistry.getSearchService().query(
-							searchParameters);
-					for (NodeRef dataListChildren : rs.getNodeRefs()) {
+					
+					List<ChildAssociationRef> lstChildAssociationRefs=serviceRegistry.getNodeService().getChildAssocs(nodeRef);
+					for (ChildAssociationRef dataListChildren : lstChildAssociationRefs) {
 						Serializable name = serviceRegistry.getNodeService()
-								.getProperties(dataListChildren)
+								.getProperties(dataListChildren.getChildRef())
 								.get(QName.createQName(VendorDatalist.REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI,req.getParameter(PARAM_FIELD_NAME)));
 						picklistItems.add(new PicklistItem(name != null ? name
 								.toString() : "", name != null ? name
