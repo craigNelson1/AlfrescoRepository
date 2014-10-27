@@ -89,7 +89,7 @@
 					<field id="rwa:VendorId" label="Vendor Id">
 						<control
 							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
-							<control-param name="siteName">vendorlist</control-param>
+							<control-param name="siteName">accounting</control-param>
 							<control-param name="dataListName">vendorlist</control-param>
 							<control-param name="fieldname">VendorId</control-param>
 						</control>
@@ -155,7 +155,7 @@
 					<field id="rwa:VendorId" label="Vendor Id">
 						<control
 							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
-							<control-param name="siteName">vendorlist</control-param>
+							<control-param name="siteName">accounting</control-param>
 							<control-param name="dataListName">vendorlist</control-param>
 							<control-param name="fieldname">VendorId</control-param>
 						</control>
@@ -164,7 +164,7 @@
 					<field id="rwa:VendorName" label="Vendor Name">
 						<control
 							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
-							<control-param name="siteName">vendorlist</control-param>
+							<control-param name="siteName">accounting</control-param>
 							<control-param name="dataListName">vendorlist</control-param>
 							<control-param name="fieldname">VendorName</control-param>
 						</control>

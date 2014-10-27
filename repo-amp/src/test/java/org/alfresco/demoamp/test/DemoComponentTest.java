@@ -80,7 +80,7 @@ public class DemoComponentTest {
         int childNodeCount = demoComponent.childNodesCount(companyHome);
         assertNotNull(childNodeCount);
         // There are 7 folders by default under Company Home
-        assertEquals(7, childNodeCount);
+        assertEquals(8, childNodeCount);
     }
 
 }

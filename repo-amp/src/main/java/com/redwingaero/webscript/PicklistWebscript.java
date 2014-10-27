@@ -103,8 +103,9 @@ public class PicklistWebscript extends DeclarativeWebScript {
 						.getNodeService().getProperties(nodeRef);
 				if (props.get(ContentModel.PROP_TITLE).equals(dataListName)) {
 					query = new StringBuffer();
-					query.append("PATH:\"app:company_home/st:sites/cm:vendorlist/cm:dataLists/cm:"
+					query.append("PATH:\"app:company_home/st:sites/cm:accounting/cm:dataLists/"
 							+ props.get(ContentModel.PROP_NAME) + "/*\"");
+
 					logger.debug("Query = " + query);
 					// Set search parameters
 					searchParameters = new SearchParameters();
