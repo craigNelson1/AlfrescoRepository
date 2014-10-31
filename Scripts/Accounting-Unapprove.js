@@ -39,7 +39,6 @@ for (var i =0; i < arrayLength; i++){
 		   destination = location.createFolder(filingLocation[i]);
 		}
 		location = destination;
-			log("Got to unapproved");
 
 	}
 	document.move(destination);

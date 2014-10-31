@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+    <shortname>Picklist Webscript</shortname>
+    <description>provides picklist values</description>
+    <url>/com/redwingaero/import/datalist</url>
+    <format default="json">argument</format>
+    <formdata multipart-processing="false" /> 
+    <authentication runas="admin">user</authentication>
+    <transaction>none</transaction>
+</webscript>

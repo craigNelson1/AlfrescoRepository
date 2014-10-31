@@ -1,0 +1,6 @@
+<webscript>
+   <shortname>Import Vendor List</shortname>
+   <description>Import Vendor List</description>
+   <family>site-dashlet</family>
+   <url>/components/dashlets/import/datalist</url>
+</webscript>

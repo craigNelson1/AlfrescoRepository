@@ -20,7 +20,15 @@ public class VendorDatalist
     
     public static final QName TYPE_VALUE_ASSISTANCE_LIST_ITEM = QName.createQName(REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI, "VendorDatalist");
     public static final QName TYPE_DATALIST = QName.createQName(DATALIST_MODEL_URI, "dataList");
+    public static final QName TYPE_DATALIST_VENDORDATALIST = QName.createQName(REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI, "VendorDatalist");
+    
     
     public static final QName PROP_SORT_ORDER = QName.createQName(REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI, "VendorId");
     public static final QName PROP_VALUE = QName.createQName(REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI, "VendorName");
+    public static final QName PROP_ADDRRESS= QName.createQName(REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI, "VendorAddress");
+    
+   // public static final QName PROP_SORT_ORDER = QName.createQName(REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI, "VendorId");
+  //  public static final QName PROP_VALUE = QName.createQName(REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI, "VendorName");
+
+        
 }

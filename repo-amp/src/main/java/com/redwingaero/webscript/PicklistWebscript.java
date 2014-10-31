@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.alfresco.model.ContentModel;
-import org.alfresco.repo.jscript.ChildAssociation;
 import org.alfresco.repo.transaction.RetryingTransactionHelper.RetryingTransactionCallback;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
@@ -16,8 +15,8 @@ import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
 import org.alfresco.service.cmr.search.SearchParameters;
 import org.alfresco.service.cmr.search.SearchService;
+import org.alfresco.service.cmr.site.SiteInfo;
 import org.alfresco.service.namespace.QName;
-import org.alfresco.util.ParameterCheck;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.Cache;
@@ -76,17 +75,21 @@ public class PicklistWebscript extends DeclarativeWebScript {
 
 	protected void process(WebScriptRequest req, Map<String, Object> model)
 			throws Exception {
-		String siteName = req.getParameter(PARAM_SITE_NAME);
-		ParameterCheck.mandatoryString(PARAM_SITE_NAME, siteName);
-		String dataListName = req.getParameter(PARAM_DATALIST_NAME);
-		ParameterCheck.mandatoryString(PARAM_DATALIST_NAME, siteName);
-
+		if (fillSiteData(req, model))
+			return;
+		else if (fillDatalistData(req, model))
+			return;
+		else {
+			fillParamData(req, model);
+			return;
+		}
+/*		String dataListName = req.getParameter(PARAM_DATALIST_NAME);
 		// get the folder for the datalist
 		StringBuffer query = new StringBuffer();
 		query.append("PATH:\"app:company_home/st:sites/cm:" + siteName
 				+ "/cm:dataLists/*\"");
 		logger.debug("Query = " + query);
-		// Set search parameters
+		// Set search parameterspn
 		SearchParameters searchParameters = new SearchParameters();
 		searchParameters.addStore(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
 		searchParameters.setLanguage(SearchService.LANGUAGE_LUCENE);
@@ -104,12 +107,17 @@ public class PicklistWebscript extends DeclarativeWebScript {
 				Map<QName, Serializable> props = serviceRegistry
 						.getNodeService().getProperties(nodeRef);
 				if (props.get(ContentModel.PROP_TITLE).equals(dataListName)) {
-					
-					List<ChildAssociationRef> lstChildAssociationRefs=serviceRegistry.getNodeService().getChildAssocs(nodeRef);
+
+					List<ChildAssociationRef> lstChildAssociationRefs = serviceRegistry
+							.getNodeService().getChildAssocs(nodeRef);
 					for (ChildAssociationRef dataListChildren : lstChildAssociationRefs) {
-						Serializable name = serviceRegistry.getNodeService()
+						Serializable name = serviceRegistry
+								.getNodeService()
 								.getProperties(dataListChildren.getChildRef())
-								.get(QName.createQName(VendorDatalist.REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI,req.getParameter(PARAM_FIELD_NAME)));
+								.get(QName
+										.createQName(
+												VendorDatalist.REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI,
+												req.getParameter(PARAM_FIELD_NAME)));
 						picklistItems.add(new PicklistItem(name != null ? name
 								.toString() : "", name != null ? name
 								.toString() : ""));
@@ -117,12 +125,99 @@ public class PicklistWebscript extends DeclarativeWebScript {
 				}
 			}
 		}
-		model.put("picklistItems", picklistItems);
+		model.put("picklistItems", picklistItems);*/
 	}
 
 	protected void handleError(String error, Map<String, Object> model) {
 		logger.error(error);
 		model.put("error", error);
+	}
+
+	private boolean fillSiteData(WebScriptRequest req, Map<String, Object> model) {
+		String siteName = req.getParameter(PARAM_SITE_NAME);
+		List<PicklistItem> itemList = new ArrayList<PicklistItem>();
+		if (siteName == null || siteName.equals("")) {
+			List<SiteInfo> lstSites = serviceRegistry.getSiteService()
+					.listSites(null, null, 0);
+
+			for (SiteInfo site : lstSites) {
+				itemList.add(new PicklistItem(site.getShortName(), site
+						.getShortName()));
+			}
+
+			model.put("picklistItems", itemList);
+			return true;
+		} else
+			return false;
+	}
+
+	private boolean fillDatalistData(WebScriptRequest req,
+			Map<String, Object> model) {
+		String siteName = req.getParameter(PARAM_SITE_NAME);
+		String datalistName = req.getParameter(PARAM_DATALIST_NAME);
+		List<PicklistItem> itemList = new ArrayList<PicklistItem>();
+		if (datalistName == null || datalistName.equals("")) {
+			SiteInfo site = serviceRegistry.getSiteService().getSite(siteName);
+			NodeRef datalist=null;
+			for(ChildAssociationRef c:serviceRegistry.getNodeService().getChildAssocs(site.getNodeRef())){
+				if(serviceRegistry.getNodeService().getProperty(c.getChildRef(),ContentModel.PROP_NAME).toString().equals("dataLists"));
+				{
+					datalist=c.getChildRef();
+				}
+			}
+			for (ChildAssociationRef node : serviceRegistry.getNodeService()
+					.getChildAssocs(datalist)) {
+				Serializable name = serviceRegistry.getNodeService()
+						.getProperty(node.getChildRef(),
+								ContentModel.PROP_TITLE);
+				itemList.add(new PicklistItem(name != null ? name.toString()
+						: "", name != null ? name.toString() : ""));
+			}
+
+			model.put("picklistItems", itemList);
+			return true;
+		} else
+			return false;
+	}
+
+	private void fillParamData(WebScriptRequest req, Map<String, Object> model) {
+		String siteName = req.getParameter(PARAM_SITE_NAME);
+		String datalistName = req.getParameter(PARAM_DATALIST_NAME);
+		List<PicklistItem> itemList = new ArrayList<PicklistItem>();
+
+		SiteInfo site = serviceRegistry.getSiteService().getSite(siteName);
+		NodeRef datalist=null;
+		for(ChildAssociationRef c:serviceRegistry.getNodeService().getChildAssocs(site.getNodeRef())){
+			if(serviceRegistry.getNodeService().getProperty(c.getChildRef(),ContentModel.PROP_NAME).toString().equals("dataLists"));
+			{
+				datalist=c.getChildRef();
+			}
+		}
+		for (ChildAssociationRef node : serviceRegistry.getNodeService()
+				.getChildAssocs(datalist)) {
+			Serializable name = serviceRegistry.getNodeService().getProperty(
+					node.getChildRef(), ContentModel.PROP_TITLE);
+			if (datalistName.equals(name)) {
+
+				for (ChildAssociationRef listMembers : serviceRegistry
+						.getNodeService().getChildAssocs(node.getChildRef())) {
+					Serializable propertyName = serviceRegistry
+							.getNodeService()
+							.getProperty(
+									listMembers.getChildRef(),
+									QName.createQName(
+											VendorDatalist.REDWINGAERO_VALUE_ASSISTANCE_MODEL_URI,
+											req.getParameter(PARAM_FIELD_NAME)));
+					itemList.add(new PicklistItem(
+							propertyName != null ? propertyName.toString() : "",
+							propertyName != null ? propertyName.toString() : ""));
+				}
+			}
+
+		}
+
+		model.put("picklistItems", itemList);
+
 	}
 
 	protected void handleError(String error, Map<String, Object> model,
