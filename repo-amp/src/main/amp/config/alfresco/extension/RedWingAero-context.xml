@@ -16,4 +16,7 @@
     <bean id="webscript.com.redwingaero.picklist.picklist.get" class="com.redwingaero.webscript.PicklistWebscript"  parent="webscript">
         <property name="serviceRegistry" ref="ServiceRegistry" />
     </bean>
+    <bean id="webscript.com.redwingaero.import-datalist.vendorlist.post" class="com.redwingaero.webscript.ImportVendorList"  parent="webscript">
+        <property name="serviceRegistry" ref="ServiceRegistry" />
+    </bean>
 </beans>

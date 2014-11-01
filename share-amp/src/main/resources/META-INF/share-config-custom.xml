@@ -70,6 +70,7 @@
 					<show id="rwa:StatementDate" />
 					<show id="rwa:InvoiceNumber" />
 					<show id="rwa:InvoiceDate" />
+					<show id="rwa:InvoiceDueDate" />
 					<show id="rwa:PurchaseOrderNumber" />
 					<show id="rwa:InvoiceAmountDue" />
 					<show id="rwa:DateStamp" />
@@ -121,6 +122,7 @@
 					<show id="rwa:StatementDate" />
 					<show id="rwa:InvoiceNumber" />
 					<show id="rwa:InvoiceDate" />
+					<show id="rwa:InvoiceDueDate" />
 					<show id="rwa:PurchaseOrderNumber" />
 					<show id="rwa:InvoiceAmountDue" />
 					<show id="rwa:DateStamp" for-mode="view" />

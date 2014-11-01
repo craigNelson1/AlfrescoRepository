@@ -94,6 +94,10 @@
 					<title>Invoice Date</title>
 					<type>d:date</type>
 				</property>
+				<property name="rwa:InvoiceDueDate">
+					<title>Due Date</title>
+					<type>d:date</type>
+				</property>
 				<property name="rwa:PurchaseOrderNumber">
 					<title>Purchase Order Number</title>
 					<type>d:text</type>

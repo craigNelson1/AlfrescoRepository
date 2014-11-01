@@ -64,7 +64,7 @@ if (typeof RWAD.DynamicDropdown== "undefined" || !RWAD.DynamicDropdown)
           site:"",
           datalist:"",
           vendorName:"",
-          vendotId:""
+          vendorId:""
       },
       /**
 		 * Fired by YUI when parent element is available for scripting
