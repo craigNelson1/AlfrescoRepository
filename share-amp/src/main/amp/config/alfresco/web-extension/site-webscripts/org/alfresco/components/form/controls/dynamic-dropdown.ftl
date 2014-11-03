@@ -34,7 +34,7 @@
 			});
 		</#if>
 	<#else>
-		new RWAD.DynamicDropdown("${fieldHtmlId}").setOptions(
+		new RWAD.DynamicDropdown.Event("${fieldHtmlId}").setOptions(
 		{
 			siteName:"${field.control.params['siteName']}",
 			dataListName:"${field.control.params['dataListName']}",

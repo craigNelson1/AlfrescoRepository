@@ -83,8 +83,8 @@ if (typeof RWAD.VendorListDashlet== "undefined" || !RWAD.VendorListDashlet)
     	  }; 
     	  console.log(form);
     	  YAHOO.util.Connect.setForm(form,true);
-    	  console.log("http://localhost:8080/alfresco/service/com/redwingaero/import/datalist?site="+Alfresco.constants.SITE+"&datalistName="+Dom.get(Alfresco.util.ComponentManager.findFirst("RWAD.VendorListDashlet.Event").id+"-datalist").value);
-    	  var request = YAHOO.util.Connect.asyncRequest("POST","http://localhost:8080/alfresco/service/com/redwingaero/import/datalist?site="+Alfresco.constants.SITE+"&datalist="+Dom.get(Alfresco.util.ComponentManager.findFirst("RWAD.VendorListDashlet.Event").id+"-datalist").value, callback); 
+    	  console.log("https://docs.redwingaero.com/alfresco/service/com/redwingaero/import/datalist?site="+Alfresco.constants.SITE+"&datalistName="+Dom.get(Alfresco.util.ComponentManager.findFirst("RWAD.VendorListDashlet.Event").id+"-datalist").value);
+    	  var request = YAHOO.util.Connect.asyncRequest("POST","https://docs.redwingaero.com/alfresco/service/com/redwingaero/import/datalist?site="+Alfresco.constants.SITE+"&datalist="+Dom.get(Alfresco.util.ComponentManager.findFirst("RWAD.VendorListDashlet.Event").id+"-datalist").value, callback); 
       },
       onLoadDatalist: function DynamicDropdown_onOnLoadDataList()
       {

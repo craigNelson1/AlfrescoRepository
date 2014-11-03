@@ -17,16 +17,32 @@
         <div class="yui-gc">
                         <@region id="edit-metadata-mgr" scope="template" />
           
-          <div class="yui-u first" style="width: 50%">
+          <div class="yui-u first" style="width: 60%; height: 70%; position: fixed;">
           <div>
                <#if (config.scoped['DocumentDetails']['document-details'].getChildValue('display-web-preview') == "true")>
                         <@region id="web-preview" scope="template" protected=true />
                 </#if>
                 </div>
           </div>
-          <div class="yui-u" style="width: 48%">
+          <style media="screen" type="text/css">
+			.share-form .form-container .form-fields
+			{
+			   width: 80%;
+			}
+			.share-form .form-container .caption{
+			text-align: left;
+			}
+			.form-container input, .form-container input[type="file"], .form-container input[type="text"], .form-container input[type="password"] 
+			{
+				width: 80%;
+              }
+            .alfresco-share .sticky-wrapper select, .yui-overlay select, .alfresco-share .sticky-wrapper input, .yui-overlay input, .alfresco-share .sticky-wrapper textarea, .yui-overlay textarea, .alfresco-share .sticky-wrapper button, .yui-overlay button{
+              	width: 80%;   
+              }
+		</style>
+          <div class="yui-u" style="width: 38%">
                <div>
-               <@region id="edit-metadata" scope="template" />
+               <@region id="edit-metadata" scope="template"/>
                </div>
              </div>
           </div>
