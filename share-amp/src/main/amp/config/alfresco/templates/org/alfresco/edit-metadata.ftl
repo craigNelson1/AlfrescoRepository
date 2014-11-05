@@ -36,7 +36,7 @@
 			{
 				width: 80%;
               }
-            .alfresco-share .sticky-wrapper select, .yui-overlay select, .alfresco-share .sticky-wrapper input, .yui-overlay input, .alfresco-share .sticky-wrapper textarea, .yui-overlay textarea, .alfresco-share .sticky-wrapper button, .yui-overlay button{
+            .alfresco-share .sticky-wrapper select, .yui-overlay select{
               	width: 80%;   
               }
 		</style>

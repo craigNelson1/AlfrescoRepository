@@ -1,0 +1,14 @@
+<extension>
+   <modules>
+      <module>
+         <id>Update Header Logo</id>
+         <version>1.0</version>
+         <customizations>
+            <customization>
+               <targetPackageRoot>org.alfresco.share.header</targetPackageRoot>
+               <sourcePackageRoot>HEADER_TITLE</sourcePackageRoot>
+           </customization>
+         </customizations>
+      </module>
+   </modules>
+</extension>
