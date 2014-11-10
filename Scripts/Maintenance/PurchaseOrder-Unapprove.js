@@ -1,5 +1,5 @@
-var vendorName = document.properties["rwapo:POVendorName"];
-var purchaseOrderNumber = document.properties["rwapo:PurchaseOrderNumberType"];
+var vendorName = document.properties["rwa:POVendorName"];
+var purchaseOrderNumber = document.properties["rwa:PurchaseOrderNumberType"];
 
 if(vendorName === "") throw "Vendor Name is required";
 
@@ -13,7 +13,7 @@ function checkForDuplicates(vendorId, vendorName, purchaseOrderNumber){
 
  var def =
  {
-  query: "rwapo:POVendorName:"+vendorName + " AND rwapo:PurchaseOrderNumberType:" + purchaseOrderNumber,
+  query: "rwa:POVendorName:"+vendorName + " AND rwa:PurchaseOrderNumberType:" + purchaseOrderNumber,
   language: "fts-alfresco"
  };
  var results = search.query(def);

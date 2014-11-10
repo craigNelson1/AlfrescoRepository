@@ -33,7 +33,7 @@
 		<types>
 			<type name="cm:content">
 				<subtype name="rwa:Invoice" />
-				 <subtype name="rwapo:PurchaseOrder" />	
+				 <subtype name="rwa:PurchaseOrder" />	
 			</type>
 		</types>
 	</config>
@@ -209,20 +209,21 @@
 	</config>
 
 
-      <config evaluator="model-type" condition="rwapo:PurchaseOrder">
+      <config evaluator="model-type" condition="rwa:PurchaseOrder">
 		<forms>
 			<!-- Search form -->
 			<form id="search">
 				<field-visibility>
 					<show id="cm:name" />
 					<show id="cm:description" />
-					<show id="rwapo:PurchaseOrderNumberType" />
-					<show id="rwapo:PODate" />
-					<show id="rwapo:POVendorName" />
-					<show id="rwapo:POAmount" />
+					<show id="rwa:PurchaseOrderNumberType" />
+					<show id="rwa:PODate" />
+					<show id="rwa:POVendorName" />
+					<show id="rwa:POAmount" />
+					<show id="rwa:POAssociationInvoice"></show>
 				</field-visibility>
 				<appearance>
-				    <field id="rwapo:POVendorName" label="Vendor Name">
+				    <field id="rwa:POVendorName" label="Vendor Name">
 						<control
 							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
 							<control-param name="siteName">accounting</control-param>
@@ -235,16 +236,16 @@
 		</forms>
 	</config>
 
-	<config evaluator="node-type" condition="rwapo:PurchaseOrder">
+	<config evaluator="node-type" condition="rwa:PurchaseOrder">
 		<forms>
 			<form>
 				<field-visibility>
 					<show id="cm:name" />
 					<show id="cm:description" force="true" />
-					<show id="rwapo:PurchaseOrderNumberType" />
-					<show id="rwapo:PODate" />
-					<show id="rwapo:POVendorName" />
-					<show id="rwapo:POAmount" />
+					<show id="rwa:PurchaseOrderNumberType" />
+					<show id="rwa:PODate" />
+					<show id="rwa:POVendorName" />
+					<show id="rwa:POAmount" />
 					<show id="cm:title" for-mode="view" />
 					<show id="cm:author" for-mode="view" />
 					<show id="cm:modified" for-mode="view" />
@@ -257,9 +258,10 @@
 					<show id="cm:created" for-mode="view" />
 					<show id="cm:creator" for-mode="view" />
 					<show id="cm:taggable" for-mode="edit" />
+					<show id="rwa:POAssociationInvoice"></show>
 				</field-visibility>
 				<appearance>			
-					<field id="rwapo:POVendorName" label="Vendor Name">
+					<field id="rwa:POVendorName" label="Vendor Name">
 						<control
 							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
 							<control-param name="siteName">accounting</control-param>
@@ -277,10 +279,18 @@
 							<control-param name="createNewItemIcon">tag</control-param>
 						</control>
 					</field>
-					<field id="rwapo:POAmount">
+					<field id="rwa:POAmount">
 						<control template="/org/alfresco/components/form/controls/currency.ftl">
 						</control>
 					</field>
+					<field id="rwa:POAssociation" label="Supporting Purchase Orders">
+	                    <control template="/org/alfresco/components/form/controls/association.ftl">
+		                     <control-param name="showTargetLink">true</control-param>
+		                     <control-param name="compactMode">true</control-param>
+		                     <control-param name="displayMode">list</control-param>
+		                     <control-param name="startLocation">/app:company_home/st:sites/cm:accounting/cm:documentLibrary</control-param>
+	                    </control>
+              		</field>
 				</appearance>
 			</form>
 		</forms>

@@ -1,40 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model name="rwapo:PurchaseOrder" xmlns="http://www.alfresco.org/model/dictionary/1.0">
-<description>Purchase Orders</description>
+	<description>Purchase Orders</description>
 	<author>Craig Nelson</author>
 	<version>1.0</version>
 	<imports>
-		 <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
-        <!-- Import Alfresco Content Domain Model Definitions -->
-        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+		<!-- Import Alfresco Content Domain Model Definitions -->
+		<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+		<import uri="http://www.redwingaero.com/link/myfilefile/1.0"
+			prefix="rwa" />
 	</imports>
 	<namespaces>
-		<namespace uri="http://www.redwingaero.com/link/purchaseOrder/1.0" prefix="rwapo" />
+		<namespace uri="http://www.redwingaero.com/link/purchaseOrder/1.0"
+			prefix="rwapo" />
 	</namespaces>
-	   
-     
 	<types>
-	  <type name="rwapo:PurchaseOrder">
-	   	 <title>PurchaseOrder</title>
-		 <parent>cm:content</parent>
-			<properties>
-				<property name="rwapo:PurchaseOrderNumberType">
-					<title>PO Number</title>
-					<type>d:text</type>
-				</property>
-				<property name="rwapo:PODate">
-					<title>PO Date</title>
-					<type>d:date</type>
-				</property>
-				<property name="rwapo:POVendorName">
-					<title>Vendor Name</title>
-					<type>d:text</type>
-				</property>
-				<property name="rwapo:POAmount">
-					<title>Amount</title>
-					<type>d:double</type>
-				</property>
-	   		</properties>
-	   </type>
+		
 	</types>
 </model>

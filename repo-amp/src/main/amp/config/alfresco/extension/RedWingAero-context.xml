@@ -6,7 +6,6 @@
     <bean id="redwingaero.dictionaryBrokerAgreement" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
         <property name="models">
             <list>
-			    <value>alfresco/extension/model/PurchaseOrder.xml</value>
 			    <value>alfresco/extension/model/ApprovalAspect.xml</value>
 				<value>alfresco/extension/model/Accounting.xml</value>
             	<value>alfresco/extension/dataLists/VendorDatalist.xml</value>

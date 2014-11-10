@@ -1,8 +1,8 @@
 
-var purchaseOrderNumber = document.properties["rwapo:PurchaseOrderNumberType"];
-var purchaseOrderDate = document.properties["rwapo:PODate"];
-var poVendorName = document.properties["rwapo:POVendorName"];
-var poAmount = document.properties["rwapo:POAmount"];
+var purchaseOrderNumber = document.properties["rwa:PurchaseOrderNumberType"];
+var purchaseOrderDate = document.properties["rwa:PODate"];
+var poVendorName = document.properties["rwa:POVendorName"];
+var poAmount = document.properties["rwa:POAmount"];
 var createdDate = document.properties["cm:created"];
 var filingDate;
 
@@ -29,7 +29,7 @@ setProjectFile(document, filingLocation);
 function checkForDuplicates(vendorName, purchaseOrderNumber, poAmount){
  var def =
  {
-  query: "rwapo:POVendorName:"+vendorName + " AND rwapo:PurchaseOrderNumberType:" + purchaseOrderNumber,
+  query: "rwa:POVendorName:"+vendorName + " AND rwa:PurchaseOrderNumberType:" + purchaseOrderNumber,
   language: "fts-alfresco"
  };
  var results = search.query(def);

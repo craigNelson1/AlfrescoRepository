@@ -7,7 +7,6 @@
 		 <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
         <!-- Import Alfresco Content Domain Model Definitions -->
         <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
-        <import uri="http://www.redwingaero.com/link/purchaseOrder/1.0" prefix="rwapo" />
 	</imports>
 	<namespaces>
 		<namespace uri="http://www.redwingaero.com/link/myfilefile/1.0" prefix="rwa" />
@@ -138,13 +137,48 @@
 						   <many>true</many>
 				    </source>
 				    <target>
-						   <class>rwapo:PurchaseOrder</class>
+						   <class>rwa:PurchaseOrder</class>
 						   <mandatory>false</mandatory>
 						   <many>true</many>
 				    </target>
 			   </association>
             </associations>
 	   </type>
+	   <type name="rwa:PurchaseOrder">
+			<title>PurchaseOrder</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="rwa:PurchaseOrderNumberType">
+					<title>PO Number</title>
+					<type>d:text</type>
+				</property>
+				<property name="rwa:PODate">
+					<title>PO Date</title>
+					<type>d:date</type>
+				</property>
+				<property name="rwa:POVendorName">
+					<title>Vendor Name</title>
+					<type>d:text</type>
+				</property>
+				<property name="rwa:POAmount">
+					<title>Amount</title>
+					<type>d:double</type>
+				</property>
+			</properties>
+			<associations>
+				<association name="rwa:POAssociationInvoice">
+					<source>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</source>
+					<target>
+						<class>rwa:Invoice</class>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</target>
+				</association>
+			</associations>
+		</type>
 	</types>
 	
 	
