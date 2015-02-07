@@ -13,15 +13,6 @@
 	</namespaces>
 	
 	<constraints>
-    	<constraint name="rwa:FETRateList" type="LIST">
-            <parameter name="allowedValues">
-                <list>
-                    <value></value>
-                    <value>24.40</value>
-                    <value>21.90</value>
-                </list>
-            </parameter>
-        </constraint>
         <constraint name="rwa:AuditStatusList" type="LIST">
             <parameter name="allowedValues">
                 <list>
@@ -32,40 +23,12 @@
                 </list>
             </parameter>
         </constraint>
-        <constraint name="rwa:FETRefundList" type="LIST">
-            <parameter name="allowedValues">
-                <list>
-                    <value></value>
-                    <value>Pending</value>
-                    <value>Submitted</value>
-                </list>
-            </parameter>
-        </constraint>
-        <constraint name="rwa:POMatchStatusList" type="LIST">
-            <parameter name="allowedValues">
-                <list>
-                     <value></value>               
-                    <value>Pending</value>
-                    <value>Complete</value>
-                </list>
-            </parameter>
-        </constraint>
         <constraint name="rwa:PaymentStatusList" type="LIST">
             <parameter name="allowedValues">
                 <list>
                     <value></value>
                     <value>Pending</value>
                     <value>Complete</value>
-                </list>
-            </parameter>
-        </constraint>
-         <constraint name="rwa:InvoiceTypeList" type="LIST">
-            <parameter name="allowedValues">
-                <list>
-                    <value></value>
-                    <value>Fuel</value>
-                    <value>Non-Fuel</value>
-                    <value>Un-Marked</value>  
                 </list>
             </parameter>
         </constraint>
@@ -81,9 +44,13 @@
 					<title>Vendor Name</title>
 					<type>d:text</type>
 				</property>
-				<property name="rwa:StatementDate">
-					<title>Statement Date</title>
-					<type>d:date</type>
+				<property name="rwa:InvoiceDateText">
+					<title>Invoice Date Text</title>
+					<type>d:text</type>
+				</property>
+				<property name="rwa:InvoiceDueDateText">
+					<title>Invoice Due Date Text</title>
+					<type>d:text</type>
 				</property>
 				<property name="rwa:InvoiceNumber">
 					<title>Invoice Number</title>
@@ -103,7 +70,7 @@
 				</property>
 				<property name="rwa:InvoiceAmountDue">
 					<title>Invoice Amount Due</title>
-					<type>d:double</type>
+					<type>d:text</type>
 				</property>
 				<property name="rwa:DateStamp">
 					<title>DateStamp</title>
@@ -113,12 +80,12 @@
 					<title>Year</title>
 					<type>d:text</type>
 				</property>
-				<property name="rwa:InvoiceType">
-					<title>Invoice Type</title>
+				<property name="rwa:AuditStatus">
+					<title>Audit Status</title>
 					<type>d:text</type>
-					<default>Un-Marked</default>
+					<default>Pending</default>
 					<constraints>
-                        <constraint ref="rwa:InvoiceTypeList" />
+                        <constraint ref="rwa:AuditStatusList" />
                     </constraints>
 				</property>
 				<property name="rwa:PaymentStatus">
@@ -137,7 +104,7 @@
 						   <many>true</many>
 				    </source>
 				    <target>
-						   <class>rwa:PurchaseOrder</class>
+						   <class>cm:content</class>
 						   <mandatory>false</mandatory>
 						   <many>true</many>
 				    </target>
@@ -172,7 +139,7 @@
 						<many>true</many>
 					</source>
 					<target>
-						<class>rwa:Invoice</class>
+						<class>cm:content</class>
 						<mandatory>false</mandatory>
 						<many>true</many>
 					</target>
@@ -181,47 +148,22 @@
 		</type>
 	</types>
 	
-	
 	 <aspects>
-		<aspect name="rwa:FuelInvoice">
-			<title>Fuel Invoice</title>
-			<properties>
-				<property name="rwa:AuditStatus">
-					<title>Audit Status</title>
-					<type>d:text</type>
-					<default>Pending</default>
-					<constraints>
-                        <constraint ref="rwa:AuditStatusList" />
-                    </constraints>
-				</property>
-				<property name="rwa:FETRate">
-				    <title>FET Rate</title>
-					<type>d:text</type>
-					<constraints>
-                        <constraint ref="rwa:FETRateList" />
-                    </constraints>
-				</property>
-				<property name="rwa:FETRefund">
-					<title>FET Refund</title>
-					<type>d:text</type>
-					<constraints>
-                        <constraint ref="rwa:FETRefundList" />
-                    </constraints>
-				</property>
-			</properties>
-		</aspect>
-		<aspect name="rwa:NonFuelInvoice">
-			<title>Non-Fuel Invoice</title>
-			<properties>
-				<property name="rwa:POMatchStatus">
-					<title>PO Match Status</title>
-					<type>d:text</type>
-					<default>Pending</default>
-					<constraints>
-                        <constraint ref="rwa:POMatchStatusList" />
-                    </constraints>
-				</property>
-			</properties>
+		<aspect name="rwa:LinkDocs">
+			<title>Link Documents</title>
+			<associations>
+				<association name="rwa:DocumentAssociation">
+					<source>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</source>
+					<target>
+						<class>cm:content</class>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</target>
+				</association>
+			</associations>
 		</aspect>
 	</aspects>
 </model>

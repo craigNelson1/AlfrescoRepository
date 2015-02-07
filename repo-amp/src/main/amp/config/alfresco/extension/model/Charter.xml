@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="charter:Charter" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+<description>Charter Department Type and Aspect</description>
+	<author>Craig Nelson</author>
+	<version>1.0</version>
+	<imports>
+		 <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+	</imports>
+	<namespaces>
+		<namespace uri="http://www.redwingaero.com/charter/1.0" prefix="charter" />
+	</namespaces>
+
+	<constraints>
+    	<constraint name="charter:CharterStatusList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value>In Progress</value>
+                    <value>Completed</value>
+                    <value>Archived</value>            
+                </list>
+            </parameter>
+        </constraint>
+    </constraints>
+
+	<types>
+	  <type name="charter:CharterCheckList">
+	   	 <title>Charter Information</title>
+		 <parent>cm:folder</parent>
+		 <properties>
+			<property name="charter:CustomerNumber">
+		 		<title>Charter Number</title>
+				<type>d:text</type>
+		 	</property>
+			<property name="charter:QuoteNumber">
+		 		<title>Quote Number</title>
+				<type>d:text</type>
+		 	</property>
+		 	<property name="charter:QuotePrice">
+		 		<title>Quote Price</title>
+				<type>d:text</type>
+		 	</property>
+		 	<property name="charter:SegFee">
+		 		<title>Seg Fee</title>
+				<type>d:text</type>
+		 	</property>
+		    <property name="charter:EmailItineraryToBroker">
+		 		<title>Email Itinerary to Broker</title>
+				<type>d:boolean</type>
+		 	</property>
+		 	<property name="charter:EmailInformation">
+		 		<title>Email Information</title>
+				<type>d:text</type>
+		 	</property>
+		 	<property name="charter:Catering">
+		 		<title>Catering</title>
+				<type>d:boolean</type>
+		 	</property>
+		 	<property name="charter:CateringDetails">
+		 		<title>Catering Details</title>
+				<type>d:text</type>
+		 	</property>
+		 	<property name="charter:IATA">
+		 		<title>IATA</title>
+				<type>d:text</type>
+				<multiple>true</multiple>
+		 	</property>
+		 </properties>
+	 </type>
+	</types>
+		 
+	 <aspects>
+		 <aspect name="charter:Charter">
+				<title>Charter Status</title>
+				<properties>
+					<property name="charter:CharterStatus">
+						<title>Charter Status</title>
+						<type>d:text</type>
+						<constraints>
+	                        <constraint ref="charter:CharterStatusList" />
+	                    </constraints>
+					</property>	
+				</properties>
+			</aspect>
+			<aspect name="charter:InternationalCharterCheckList">
+				<title>International Check List</title>
+				<properties>
+				</properties>
+			</aspect>
+		</aspects>
+</model>

@@ -8,6 +8,7 @@
             <list>
 			    <value>alfresco/extension/model/ApprovalAspect.xml</value>
 				<value>alfresco/extension/model/Accounting.xml</value>
+				<value>alfresco/extension/model/Charter.xml</value>
             	<value>alfresco/extension/dataLists/VendorDatalist.xml</value>
             </list>
         </property>
