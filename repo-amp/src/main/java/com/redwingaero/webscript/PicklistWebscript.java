@@ -25,7 +25,6 @@ import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 
 import com.redwingaero.model.VendorDatalist;
-
 public class PicklistWebscript extends DeclarativeWebScript {
 
 	private static final Log logger = LogFactory

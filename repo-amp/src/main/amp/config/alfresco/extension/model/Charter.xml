@@ -29,64 +29,108 @@
 	   	 <title>Charter Information</title>
 		 <parent>cm:folder</parent>
 		 <properties>
-			<property name="charter:CustomerNumber">
-		 		<title>Charter Number</title>
-				<type>d:text</type>
-		 	</property>
-			<property name="charter:QuoteNumber">
-		 		<title>Quote Number</title>
-				<type>d:text</type>
-		 	</property>
-		 	<property name="charter:QuotePrice">
-		 		<title>Quote Price</title>
-				<type>d:text</type>
-		 	</property>
-		 	<property name="charter:SegFee">
-		 		<title>Seg Fee</title>
-				<type>d:text</type>
-		 	</property>
-		    <property name="charter:EmailItineraryToBroker">
-		 		<title>Email Itinerary to Broker</title>
-				<type>d:boolean</type>
-		 	</property>
-		 	<property name="charter:EmailInformation">
-		 		<title>Email Information</title>
-				<type>d:text</type>
-		 	</property>
-		 	<property name="charter:Catering">
-		 		<title>Catering</title>
-				<type>d:boolean</type>
-		 	</property>
-		 	<property name="charter:CateringDetails">
-		 		<title>Catering Details</title>
-				<type>d:text</type>
-		 	</property>
-		 	<property name="charter:IATA">
-		 		<title>IATA</title>
-				<type>d:text</type>
-				<multiple>true</multiple>
-		 	</property>
+			
 		 </properties>
 	 </type>
 	</types>
 		 
 	 <aspects>
-		 <aspect name="charter:Charter">
+		 <aspect name="charter:CharterStatusInfo">
 				<title>Charter Status</title>
-				<properties>
-					<property name="charter:CharterStatus">
-						<title>Charter Status</title>
-						<type>d:text</type>
-						<constraints>
-	                        <constraint ref="charter:CharterStatusList" />
-	                    </constraints>
-					</property>	
-				</properties>
-			</aspect>
-			<aspect name="charter:InternationalCharterCheckList">
-				<title>International Check List</title>
-				<properties>
-				</properties>
-			</aspect>
-		</aspects>
+			<properties>
+				<property name="charter:QuoteNumber">
+			 		<title>Quote Number</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:CustomerNumber">
+			 		<title>Customer Name</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:Routing">
+			 		<title>Routing Information</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:RoutingAudited">
+			 		<title>Routing Information</title>
+					<type>d:text</type>
+			 	</property>			 				 	
+			 	<property name="charter:BrokerInformation">
+			 		<title>Broker Information</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:BrokerInformationAudited">
+			 		<title>Broker Information</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:Legs">
+			 		<title>Legs</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:LegsAudited">
+			 		<title>Legs</title>
+					<type>d:text</type>
+			 	</property>
+			    <property name="charter:Itinerary">
+			 		<title>Itinerary</title>
+					<type>d:text</type>
+			 	</property>
+			    <property name="charter:ItineraryAudited">
+			 		<title>Itinerary</title>
+					<type>d:text</type>
+			 	</property>			 	
+			 	<property name="charter:CreditCardAuthorization">
+			 		<title>Credit Card Authorization</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:CreditCardAuthorizationAudited">
+			 		<title>Credit Card Authorization</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:Catering">
+			 		<title>Catering</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:CateringAudited">
+			 		<title>Catering</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:AdditionalCharges">
+			 		<title>Additional Charges</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:AdditionalChargesAudit">
+			 		<title>Additional Charges</title>
+					<type>d:text</type>
+			 	</property>			 	
+			 	<property name="charter:ShredCreditCardForm">
+			 		<title>Shred Credit Card Form</title>
+					<type>d:boolean</type>
+			 	</property>
+			 	<property name="charter:CompileFinalInvoiceForAccounting">
+			 		<title>Compile Final Invoice For Accounting</title>
+					<type>d:boolean</type>
+			 	</property>
+			 	<property name="charter:Notes">
+			 		<title>Notes</title>
+					<type>d:text</type>
+			 	</property>
+			 	<property name="charter:NotesAudited">
+			 		<title>Notes</title>
+					<type>d:text</type>
+			 	</property>
+			    <property name="charter:CharterStatus">
+					<title>Charter Status</title>
+					<type>d:text</type>
+					<constraints>
+                        <constraint ref="charter:CharterStatusList" />
+                    </constraints>
+				</property>	
+		</properties>
+	</aspect>
+	<aspect name="charter:InternationalCharterCheckList">
+		<title>International Check List</title>
+		<properties>
+		</properties>
+	</aspect>
+	</aspects>	
 </model>

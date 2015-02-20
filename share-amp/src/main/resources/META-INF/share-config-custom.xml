@@ -14,9 +14,9 @@
 		<aspects>
 			<!-- Aspects that a user can see -->
 			<visible>
-				<aspect name="rwa:FuelInvoice" />
-				<aspect name="rwa:NonFuelInvoice" />
 				<aspect name="apr:Approval" />
+				<aspect name="rwa:LinkDocs"/>
+				<aspect name="charter:CharterStatusInfo" />
 			</visible>
 
 			<!-- Aspects that a user can add. Same as "visible" if left empty -->
@@ -31,9 +31,13 @@
 			example: <type name="cm:content"> <subtype name="cm:mysubtype" /> </type> 
 			Remember to also add the relevant i18n string(s): cm_mysubtype=My SubType -->
 		<types>
+		    <type name="cm:folder">
+		        <subtype name="charter:CharterCheckList" />    
+		    </type>
+
 			<type name="cm:content">
 				<subtype name="rwa:Invoice" />
-				 <subtype name="rwa:PurchaseOrder" />	
+				<subtype name="rwa:PurchaseOrder" />
 			</type>
 		</types>
 	</config>
@@ -67,40 +71,17 @@
 					<show id="cm:name" />
 					<show id="cm:description" />
 					<show id="rwa:VendorName" />
-					<show id="rwa:StatementDate" />
 					<show id="rwa:InvoiceNumber" />
 					<show id="rwa:InvoiceDate" />
 					<show id="rwa:InvoiceDueDate" />
 					<show id="rwa:PurchaseOrderNumber" />
 					<show id="rwa:InvoiceAmountDue" />
 					<show id="rwa:DateStamp" />
-					<show id="rwa:InvoiceType" />
 					<show id="rwa:PaymentStatus" />
 					<show id="rwa:AuditStatus" />
-					<show id="rwa:FETRate" />
-					<show id="rwa:FETRefund" />
-					<show id="rwa:POMatchStatus" />
-					<show id="rwa:POAssociation" />
 					<show id="rwa:InvoiceYear" />
 				</field-visibility>
 				<appearance>
-					<field id="rwa:FETRate" label="FET Rate">
-						<control template="/org/alfresco/components/form/controls/selectone.ftl">
-							<control-param name="options">,24.40,21.90</control-param>
-						</control>
-					</field>
-					<field id="rwa:FETRefund" label="FET Refund">
-						<control template="/org/alfresco/components/form/controls/selectone.ftl">
-							<control-param name="options">,Pending,Submitted
-							</control-param>
-						</control>
-					</field>
-					<field id="rwa:POMatchStatus" label="PO Match Status">
-						<control template="/org/alfresco/components/form/controls/selectone.ftl">
-							<control-param name="options">,Pending,Complete
-							</control-param>
-						</control>
-					</field>
 					<field id="rwa:AuditStatus" label="Audit Status">
 						<control template="/org/alfresco/components/form/controls/selectone.ftl">
 							<control-param name="options">,Pending,Discrepancy,Complete
@@ -119,20 +100,14 @@
 					<show id="cm:name" />
 					<show id="cm:description" force="true" />
 					<show id="rwa:VendorName" />
-					<show id="rwa:StatementDate" />
 					<show id="rwa:InvoiceNumber" />
 					<show id="rwa:InvoiceDate" />
 					<show id="rwa:InvoiceDueDate" />
 					<show id="rwa:PurchaseOrderNumber" />
 					<show id="rwa:InvoiceAmountDue" />
 					<show id="rwa:DateStamp" for-mode="view" />
-					<show id="rwa:InvoiceType" />
 					<show id="rwa:PaymentStatus" />
 					<show id="rwa:AuditStatus" />
-					<show id="rwa:FETRate" />
-					<show id="rwa:FETRefund" />
-					<show id="rwa:POMatchStatus" />
-					<show id="rwa:POAssociation" />
 					<show id="rwa:InvoiceYear" for-mode="view" />
 					<show id="cm:title" for-mode="view" />
 					<show id="cm:author" for-mode="view" />
@@ -148,15 +123,6 @@
 					<show id="cm:taggable" for-mode="edit" />
 				</field-visibility>
 				<appearance>
-					
- 					<field id="rwa:POAssociation" label="Supporting Purchase Orders">
-	                    <control template="/org/alfresco/components/form/controls/association.ftl">
-		                     <control-param name="showTargetLink">true</control-param>
-		                     <control-param name="compactMode">true</control-param>
-		                     <control-param name="displayMode">list</control-param>
-		                     <control-param name="startLocation">/app:company_home/st:sites/cm:accounting/cm:documentLibrary</control-param>
-	                    </control>
-              		</field>
 					<field id="rwa:VendorName" label="Vendor Name">
 						<control
 							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
@@ -168,8 +134,7 @@
 					<field id="cm:taggable">
 						<control>
 							<control-param name="compactMode">true</control-param>
-							<control-param name="params">aspect=cm:taggable
-							</control-param>
+							<control-param name="params">aspect=cm:taggable</control-param>
 							<control-param name="createNewItemUri">/api/tag/workspace/SpacesStore
 							</control-param>
 							<control-param name="createNewItemIcon">tag</control-param>
@@ -177,24 +142,6 @@
 					</field>
 					<field id="rwa:InvoiceAmountDue">
 						<control template="/org/alfresco/components/form/controls/currency.ftl">
-						</control>
-					</field>
-					<field id="rwa:FETRate" label="FET Rate">
-						<control template="/org/alfresco/components/form/controls/selectone.ftl">
-							<control-param name="options">,24.40,21.90</control-param>
-						</control>
-					</field>
-
-					<field id="rwa:FETRefund" label="FET Refund">
-						<control template="/org/alfresco/components/form/controls/selectone.ftl">
-							<control-param name="options">Pending,Submitted
-							</control-param>
-						</control>
-					</field>
-					<field id="rwa:POMatchStatus" label="PO Match Status">
-						<control template="/org/alfresco/components/form/controls/selectone.ftl">
-							<control-param name="options">Pending,Complete
-							</control-param>
 						</control>
 					</field>
 					<field id="rwa:AuditStatus" label="Audit Status">
@@ -209,7 +156,7 @@
 	</config>
 
 
-      <config evaluator="model-type" condition="rwa:PurchaseOrder">
+	<config evaluator="model-type" condition="rwa:PurchaseOrder">
 		<forms>
 			<!-- Search form -->
 			<form id="search">
@@ -220,10 +167,9 @@
 					<show id="rwa:PODate" />
 					<show id="rwa:POVendorName" />
 					<show id="rwa:POAmount" />
-					<show id="rwa:POAssociationInvoice"></show>
 				</field-visibility>
 				<appearance>
-				    <field id="rwa:POVendorName" label="Vendor Name">
+					<field id="rwa:POVendorName" label="Vendor Name">
 						<control
 							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
 							<control-param name="siteName">accounting</control-param>
@@ -258,9 +204,8 @@
 					<show id="cm:created" for-mode="view" />
 					<show id="cm:creator" for-mode="view" />
 					<show id="cm:taggable" for-mode="edit" />
-					<show id="rwa:POAssociationInvoice"></show>
 				</field-visibility>
-				<appearance>			
+				<appearance>
 					<field id="rwa:POVendorName" label="Vendor Name">
 						<control
 							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
@@ -283,14 +228,6 @@
 						<control template="/org/alfresco/components/form/controls/currency.ftl">
 						</control>
 					</field>
-					<field id="rwa:POAssociation" label="Supporting Purchase Orders">
-	                    <control template="/org/alfresco/components/form/controls/association.ftl">
-		                     <control-param name="showTargetLink">true</control-param>
-		                     <control-param name="compactMode">true</control-param>
-		                     <control-param name="displayMode">list</control-param>
-		                     <control-param name="startLocation">/app:company_home/st:sites/cm:accounting/cm:documentLibrary</control-param>
-	                    </control>
-              		</field>
 				</appearance>
 			</form>
 		</forms>
@@ -338,25 +275,61 @@
 		</forms>
 	</config>
 
-
-	<config evaluator="aspect" condition="rwa:FuelInvoice">
+	<config evaluator="model-type" condition="rwad:CustomerDataList">
 		<forms>
 			<form>
 				<field-visibility>
-					<show id="rwa:AuditStatus" />
-					<show id="rwa:FETRate" />
-					<show id="rwa:FETRefund" />
+					<show id="rwad:CustomerNumber" />
+					<show id="rwad:CustomerName" />
+				</field-visibility>
+				<create-form
+					template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+			</form>
+			<form id="datagrid">
+				<field-visibility>
+					<show id="rwad:CustomerNumber" />
+					<show id="rwad:CustomerName" />
 				</field-visibility>
 			</form>
 		</forms>
 	</config>
 
-	<config evaluator="aspect" condition="rwa:NonFuelInvoice">
+	<config evaluator="node-type" condition="rwad:CustomerDataList">
 		<forms>
 			<form>
 				<field-visibility>
-					<show id="rwa:POMatchStatus" />
+					<show id="rwad:CustomerNumber" />
+					<show id="rwad:CustomerName" />
 				</field-visibility>
+				<appearance>
+					<field id="rwad:CustomerName">
+						<control
+							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
+							<control-param name="picklistName">CustomerDataList</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="aspect" condition="rwa:LinkDocs">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="rwa:DocumentAssociation"></show>
+				</field-visibility>
+				<appearance>
+		            <field id="rwa:DocumentAssociation" label="Supporting Files">
+						<control template="/org/alfresco/components/form/controls/association.ftl">
+							<control-param name="showTargetLink">true</control-param>
+							<control-param name="compactMode">true</control-param>
+							<control-param name="displayMode">items</control-param>
+							<control-param name="startLocation">/app:company_home/st:sites/cm:accounting/cm:documentLibrary
+							</control-param>
+						</control>
+					</field>
+				</appearance>
 			</form>
 		</forms>
 	</config>
@@ -377,4 +350,216 @@
 			</form>
 		</forms>
 	</config>
+	
+     <config evaluator="aspect" condition="charter:CharterStatusInfo">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="charter:CharterStatus" />
+				    <show id="charter:CustomerNumber" />				   
+				    <show id="charter:QuoteNumber" />
+				    <show id="charter:Routing" />
+				    <show id="charter:BrokerInformation" />
+				    <show id="charter:Legs" />
+				    <show id="charter:Itinerary" />
+				    <show id="charter:CreditCardAuthorization" />
+				    <show id="charter:Catering" />
+				    <show id="charter:AdditionalCharges" />
+				    <show id="charter:ShredCreditCardForm" />
+				    <show id="charter:CompileFinalInvoiceForAccounting" />
+				    <show id="charter:Notes" />
+				    <hide id="rwa:DocumentAssociation" />
+				    <hide id="cm:taggable" /> 
+				    <hide id="cm:description" /> 
+				    <show id="cm:contains" />
+				</field-visibility>
+				<appearance>
+				    <field id="cm:name" label="Trip Number" />
+					<set id="Check List" template="/org/alfresco/components/form/charter-column-set.ftl" label="Check List Status" />
+					<field id="charter:CharterStatus" set="Check List" >
+						<control template="/org/alfresco/components/form/controls/charterProgressSelectone.ftl" />
+					</field>	
+					<field id="charter:CustomerNumber" label="Customer Name">
+						<control
+							template="/org/alfresco/components/form/controls/dynamic-dropdown.ftl">
+							<control-param name="siteName">charter</control-param>
+							<control-param name="dataListName">customerNumber</control-param>
+							<control-param name="fieldname">CustomerName</control-param>
+						</control>
+					</field>					
+					<field id="charter:QuoteNumber"  />	
+					<field id="charter:Routing">
+						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
+							<control-param name="config">
+							    key, Key, hidden;
+								date, Date, date;
+								routing, Routing, text;
+								modifiedBy, Modified By, readOnly;
+							</control-param>
+			              	<control-param name="debug">false</control-param>
+							<control-param name="propertyName">routing</control-param>
+						</control>
+					</field>
+					<field id="charter:BrokerInformation" >
+						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
+							<control-param name="config">
+							    key, Key, hidden;
+								brokerName, Broker Name, text;
+								email, Email, text;
+								phoneNumber, Phone Number, number;
+								altPhone, ALT Phone, text;
+								modifiedBy, Modified By, readOnly;
+							</control-param>
+			              	<control-param name="debug">false</control-param>
+							<control-param name="propertyName">broker</control-param>
+						</control>
+					</field>
+					<field id="charter:Legs"  >
+						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
+							<control-param name="config">
+							    key, Key, hidden;
+								date, Date, date;
+								iata, IATA, text;
+								called, CALLED, dropdown, ["Yes", "No"];
+								fbo, FBO, text;
+								fueler, FUELER, dropdown, ["AEG", "ARROW ENERGIES", "ATLANTIC AVIATION", "AVFUEL", "BLUE AIRWAYS", "COLT INTERNATIONAL", "PHILLIPS 66", "EPIC AVIATION", "EVEREST", "JET FLEET INTERNATIONAL", "LANDMARK AVIATION", "RETAILER", "ROCKWELL COLLINS", "SHELL", "SIGNATURE", "UNIVERSAL WEATHER AVIATION", "WORLD FUELS"];
+								price, PRICE, currency;
+								minUpLift, MIN UPLIFT, text;
+								savePriceQuote, SAVE PRICE QUOTE, dropdown, ["Yes", "No"];
+								modifiedBy, Modified By, readOnly;
+							</control-param>
+			              	<control-param name="debug">false</control-param>
+			              	<control-param name="propertyName">legDTP</control-param>
+						</control>
+					</field>
+					<field id="charter:Itinerary"  >
+						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
+							<control-param name="config">
+							    key, Key, hidden;
+								date, Date, date;
+								routing, Routing, text;
+								sentTo, Sent To, dropdown, ["Crew", "Broker", "Pax"];
+								sentToName, Sent To Name, text; 
+								modifiedBy, Modified By, readOnly;
+							 </control-param>
+			              	<control-param name="debug">false</control-param>
+			              	<control-param name="propertyName">itinerary</control-param>
+						</control>
+					</field>	
+						<field id="charter:CreditCardAuthorization" >
+						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
+							<control-param name="config">
+								key, Key, hidden;
+								authorizedAMT, Authorized AMT, currency;
+								authDate, Auth Date, date;
+								last4CardNo, Last 4 Card No, text;
+								modifiedBy, Modified By, readOnly;
+							 </control-param>
+			              	<control-param name="debug">false</control-param>
+							<control-param name="propertyName">CCAuthorization</control-param>
+						</control>
+					</field>					
+					<field id="charter:Catering"  >
+						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
+							<control-param name="config">
+								    key, Key, hidden;
+								date, Catering Date, date;
+								vendorName, Vendor Name, text;
+								contactInfo, Contact Info, text;
+								orderDetails, Order Details, text;
+								paid, Paid, text;
+								ordered, Ordered, dropdown, ["Yes", "No"];
+								modifiedBy, Modified By, readOnly;
+							 </control-param>
+			              	<control-param name="debug">false</control-param>
+							<control-param name="propertyName">Catering</control-param>
+						</control>
+					</field>	
+					<field id="charter:AdditionalCharges" >
+						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
+							<control-param name="config">
+								    key, Key, hidden;
+								type, Type, dropdown, ["Option 1", "Option 2", "Option 3"];
+								amount, Amount, currency;
+								notes, Notes/Description, text;
+								modifiedBy, Modified By, readOnly;
+							 </control-param>
+			              	<control-param name="debug">false</control-param>
+							<control-param name="propertyName">additionalCharges</control-param>
+						</control>
+					</field>			
+					<field id="charter:ShredCreditCardForm"  />
+					<field id="charter:CompileFinalInvoiceForAccounting" />
+   					<field id="charter:Notes"  >
+						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
+   						<control-param name="config">
+								key, Key, hidden;
+								notes,   Notes, textArea;
+								modifiedBy, Modified By, readOnly;
+							 </control-param>
+			              	<control-param name="debug">false</control-param>
+							<control-param name="propertyName">notesSection</control-param>
+   						</control>
+   					</field>					
+ 					<field id="cm:contains" label="contains">
+						<control template="/org/alfresco/components/form/controls/association.ftl">
+							<control-param name="showTargetLink">true</control-param>
+							<control-param name="compactMode">true</control-param>
+							<control-param name="displayMode">items</control-param>
+						</control>
+					</field>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+	
+	 <config evaluator="node-type" condition="cm:folder">
+      <forms>
+         <!-- Default form configuration for the cm:folder type -->
+         <form>
+            <field-visibility>
+               <show id="cm:contains" />
+               <show id="cm:name" />
+               <hide id="cm:title" />
+               <hide id="cm:description" />
+                <show id="title" for-mode="view" />
+               <!-- tags and categories -->
+
+               <!-- emailserver:aliasable aspect -->
+               <show id="emailserver:alias" />
+            </field-visibility>
+            <appearance>
+               
+               <field id="cm:name">
+                 <control>
+                    <control-param name="maxLength">255</control-param>
+                 </control>
+               </field>
+               <field id="cm:title">
+                  <control template="/org/alfresco/components/form/controls/textfield.ftl" />
+               </field>
+               <field id="cm:description">
+                  <control>
+                     <control-param name="activateLinks">true</control-param>
+                  </control>
+               </field>
+               <field id="cm:taggable">
+                  <control>
+                     <control-param name="compactMode">true</control-param>
+                     <control-param name="params">aspect=cm:taggable</control-param>
+                     <control-param name="createNewItemUri">/api/tag/workspace/SpacesStore</control-param>
+                     <control-param name="createNewItemIcon">tag</control-param>
+                  </control>
+               </field>
+               <field id="cm:categories">
+                  <control>
+                     <control-param name="compactMode">true</control-param>
+                  </control>
+               </field>
+            </appearance>
+          </form>
+		</forms>
+	</config>
+	
+	
 </alfresco-config>

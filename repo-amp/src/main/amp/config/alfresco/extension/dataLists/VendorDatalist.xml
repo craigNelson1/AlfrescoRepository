@@ -32,5 +32,19 @@
 				</property>
 			</properties>
 	   </type>
+	   <type name="rwad:CustomerDataList">
+	   	 <title>Customer Data List</title>
+		 <parent>dl:dataListItem</parent>
+			<properties>
+				<property name="rwad:CustomerNumber">
+					<title>Customer Number</title>
+					<type>d:text</type>
+				</property>
+				<property name="rwad:CustomerName">
+					<title>Customer Name</title>
+					<type>d:text</type>
+				</property>
+			</properties>
+	   </type>
 	</types>
 </model>

@@ -10,7 +10,7 @@
 				<value>alfresco/extension/model/Accounting.xml</value>
 				<value>alfresco/extension/model/Charter.xml</value>
             	<value>alfresco/extension/dataLists/VendorDatalist.xml</value>
-            </list>
+             </list>
         </property>
     </bean>
     <bean id="webscript.com.redwingaero.picklist.picklist.get" class="com.redwingaero.webscript.PicklistWebscript"  parent="webscript">

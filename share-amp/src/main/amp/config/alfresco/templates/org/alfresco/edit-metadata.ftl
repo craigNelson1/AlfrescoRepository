@@ -17,14 +17,15 @@
         <div class="yui-gc">
                         <@region id="edit-metadata-mgr" scope="template" />
           
-          <div class="yui-u first" style="width: 60%; height: 70%; position: fixed;">
+          <div  id="webpreviewID" class="yui-u first" style="width: 60%; height: 70%; position: fixed;">
           <div>
                <#if (config.scoped['DocumentDetails']['document-details'].getChildValue('display-web-preview') == "true")>
                         <@region id="web-preview" scope="template" protected=true />
                 </#if>
                 </div>
           </div>
-          <style media="screen" type="text/css">
+          
+          <style id="formManipulation" media="screen" type="text/css">
 			.share-form .form-container .form-fields
 			{
 			   width: 80%;
@@ -40,7 +41,7 @@
               	width: 80%;   
               }
 		</style>
-          <div class="yui-u" style="width: 38%">
+          <div class="yui-u" id="MetaDataForm" style="width: 38%">
                <div>
                <@region id="edit-metadata" scope="template"/>
                </div>

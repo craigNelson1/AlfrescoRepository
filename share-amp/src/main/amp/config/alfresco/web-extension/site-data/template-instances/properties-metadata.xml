@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<template-instance>
+   <template-type>org/alfresco/getProperties</template-type>
+   <properties>
+      <pageFamily>documentlibrary</pageFamily>
+      <container>documentLibrary</container>
+   </properties>
+   <components>
+
+      <!-- Edit Metadata Form Manager -->
+      <component>
+         <region-id>edit-metadata-mgr</region-id>
+         <url>/components/edit-metadata/edit-metadata-mgr</url>
+      </component>
+
+   </components>
+</template-instance>

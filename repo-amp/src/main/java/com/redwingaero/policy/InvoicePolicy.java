@@ -22,25 +22,34 @@ public class InvoicePolicy extends RuleTriggerAbstractBase implements
 
 	public void onDeleteAssociation(AssociationRef nodeAssocRef) {
 		try {
-			nodeService
-					.removeAssociation(nodeAssocRef.getTargetRef(),
-							nodeAssocRef.getSourceRef(),
-							getReverseQnameAssociationName(nodeAssocRef
-									.getTypeQName()));
+			if(nodeAssocRef.getTypeQName().toString() == "{http://www.redwingaero.com/link/myfilefile/1.0}DocumentAssociation"){
+				nodeService
+				.removeAssociation(nodeAssocRef.getTargetRef(),
+						nodeAssocRef.getSourceRef(),
+						Model.PROP_ASSO_DOCUMENT);		
+			}else{
+			/*	 nodeService.removeAssociation( nodeAssocRef.getSourceRef(), nodeAssocRef.getTargetRef(),
+						 nodeAssocRef.getTypeQName());*/
+        	}
 		} catch (IllegalArgumentException exception) {
 
+		
 		}
-
 	}
 
 	public void onCreateAssociation(AssociationRef nodeAssocRef){	
 		
 		try {
-			nodeService
-			.createAssociation(nodeAssocRef.getTargetRef(),
-					nodeAssocRef.getSourceRef(),
-					Model.PROP_ASSO_DOCUMENT);	
+			if(nodeAssocRef.getTypeQName().toString() == "{http://www.redwingaero.com/link/myfilefile/1.0}DocumentAssociation"){
+				nodeService
+				.createAssociation(nodeAssocRef.getTargetRef(),
+						nodeAssocRef.getSourceRef(),
+						Model.PROP_ASSO_DOCUMENT);	
+				
+				
+			}else{
 		
+        	}
 		} catch (Exception exception) {
 			System.out.println(exception);
 		}
