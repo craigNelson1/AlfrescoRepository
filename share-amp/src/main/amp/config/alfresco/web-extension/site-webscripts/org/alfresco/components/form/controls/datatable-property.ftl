@@ -1,5 +1,5 @@
 <#if field.control.params.config?exists><#assign dtConfig = field.control.params.config><#else><#assign dtConfig = "false"></#if>
-<#if field.control.params.debug?exists> <#assign debug = field.control.params.debug><#else>    <#assign debug = "false">   </#if>
+<#if field.control.params.tredebug?exists> <#assign debug = field.control.params.debug><#else>    <#assign debug = "true">   </#if>
 <#if field.control.params.propertyName?exists> <#assign propertyName = field.control.params.propertyName><#else>    <#assign propertyName = "DTP">   </#if>
 <#if field??>
 
@@ -132,7 +132,7 @@ if (typeof(${propertyName}) == "undefined") { var ${propertyName} = {}; }
 			switch (t) {
 				case "currency"	: return YAHOO.widget.DataTable.formatCurrency; break;
 				case "number"	: return YAHOO.widget.DataTable.formatNumber({numberOptions: {decimalPlaces: 1, decimalSeparator: '.', format: '{prefix}{number} [kn]'}}); break;
-				case "date"	: return YAHOO.widget.DataTable.formatDate; break;
+				case "date"	: return YAHOO.widget.DataTable.formatDate(new Date().format("yyyy-MM-dd")); break;
 				default 	: return YAHOO.widget.DataTable.formatText; break;
 				
 			}
@@ -258,7 +258,7 @@ if (typeof(${propertyName}) == "undefined") { var ${propertyName} = {}; }
 			switch (t) {
 				case "currency"	: return YAHOO.widget.DataTable.formatCurrency; break;
 				case "number"	: return YAHOO.widget.DataTable.formatNumber; break;
-				case "date"	: return YAHOO.widget.DataTable.formatDate; break;
+				case "date"	: return YAHOO.widget.DataTable.formatDate(new Date().format("yyyy-MM-dd")); break;
 				default 	: return YAHOO.widget.DataTable.formatText; break;
 			}
 			return t;

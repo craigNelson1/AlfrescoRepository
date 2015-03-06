@@ -1,0 +1,6 @@
+<webscript>
+   <shortname>Export Charter List</shortname>
+   <description>Import Charter List</description>
+   <family>site-dashlet</family>
+   <url>/components/dashlets/export/charterList</url>
+</webscript>

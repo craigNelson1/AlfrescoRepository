@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+    <shortname>Charter Export Picklist Webscript</shortname>
+    <description>provides dropdown values</description>
+    <url>/com/redwingaero/charter/export/picklist</url>
+    <format default="json">argument</format>
+    <authentication runas="admin">user</authentication>
+    <transaction>none</transaction>
+</webscript>

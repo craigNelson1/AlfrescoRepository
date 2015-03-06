@@ -11,6 +11,13 @@
 width: 25em;
 }
 
+.share-form .form-container .form-fields {
+border: 0px solid #fff !important;
+background-color: #fff;
+margin-left: 10px;
+width: 1000px;
+}
+
 		</style>
 
 <#list set.children as item>
@@ -30,7 +37,7 @@ width: 25em;
   	document.getElementById("MetaDataForm").setAttribute("style", "width: 90%");
   	
      }else{
- window.a =  document.getElementById("template_x002e_folder-actions_x002e_folder-details").parentNode.setAttribute("style", "width: 100%");
+ window.a =  document.getElementById("template_x002e_folder-actions_x002e_folder-details").parentNode.setAttribute("style", "width: 100%; border: none");
 		}
 	
 		</script>

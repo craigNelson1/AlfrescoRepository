@@ -53,15 +53,3 @@ for (var i =0; i < arrayLength; i++){
 
 
 
-function log(varString){
-var logFile = companyhome.childByNamePath("log.txt");
-
-if (logFile == null)
-{
-   logFile = companyhome.createFile("log.txt");
-}
-if (logFile != null)
-   {
-     logFile.content +=  varString +"\n";
-   }
-}

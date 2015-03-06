@@ -406,7 +406,7 @@
 							    key, Key, hidden;
 								brokerName, Broker Name, text;
 								email, Email, text;
-								phoneNumber, Phone Number, number;
+								phoneNumber, Phone Number, text;
 								altPhone, ALT Phone, text;
 								modifiedBy, Modified By, readOnly;
 							</control-param>
@@ -462,7 +462,7 @@
 					<field id="charter:Catering"  >
 						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
 							<control-param name="config">
-								    key, Key, hidden;
+								key, Key, hidden;
 								date, Catering Date, date;
 								vendorName, Vendor Name, text;
 								contactInfo, Contact Info, text;
@@ -478,7 +478,7 @@
 					<field id="charter:AdditionalCharges" >
 						<control template="/org/alfresco/components/form/controls/datatable-property.ftl" >
 							<control-param name="config">
-								    key, Key, hidden;
+								key, Key, hidden;
 								type, Type, dropdown, ["Option 1", "Option 2", "Option 3"];
 								amount, Amount, currency;
 								notes, Notes/Description, text;

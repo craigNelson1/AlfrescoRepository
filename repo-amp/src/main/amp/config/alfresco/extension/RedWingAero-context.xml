@@ -13,10 +13,23 @@
              </list>
         </property>
     </bean>
+    <bean id="webscript.com.redwingaero.charterstatusinfo.charterExportPicklist.get" class="com.redwingaero.webscript.CharterExportPicklistWebscript"  parent="webscript">
+        <property name="serviceRegistry" ref="ServiceRegistry" />
+    </bean>
     <bean id="webscript.com.redwingaero.picklist.picklist.get" class="com.redwingaero.webscript.PicklistWebscript"  parent="webscript">
         <property name="serviceRegistry" ref="ServiceRegistry" />
     </bean>
     <bean id="webscript.com.redwingaero.import-datalist.vendorlist.post" class="com.redwingaero.webscript.ImportVendorList"  parent="webscript">
         <property name="serviceRegistry" ref="ServiceRegistry" />
+    </bean>
+    <bean id="webscript.com.redwingaero.import-datalist.charterlist.post" class="com.redwingaero.webscript.ImportCharterList"  parent="webscript">
+        <property name="serviceRegistry" ref="ServiceRegistry" />
+    </bean>
+    <bean id="webscript.com.redwingaero.charterstatusinfo.streamcharterstatusinfo.get" class="com.redwingaero.webscript.StreamCharterStatusInfo" parent="webscript">
+          <property name="nodeService" ref="nodeService" />
+          <property name="fileFolderService" ref="fileFolderService" />
+          <property name="searchService" ref="SearchService"/>
+          <property name="siteService" ref="SiteService"/>
+          <property name="dictionaryService" ref="DictionaryService"/>
     </bean>
 </beans>

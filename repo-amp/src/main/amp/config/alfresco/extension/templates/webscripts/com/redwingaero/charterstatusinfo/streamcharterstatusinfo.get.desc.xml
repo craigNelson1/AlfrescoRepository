@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+    <shortname>CharterStatusInfo Download</shortname>
+    <description>Download CharterStatusInfo for a given path</description>
+    <url>/com/redwingaero/charterstatusinfo/streamcharterstatusinfo?path={path}</url>
+    <authentication>admin</authentication>
+  	<transaction allow="readonly"/>
+</webscript>

@@ -89,8 +89,19 @@ function CompareJSON(JSONNew, JSONAudited){
 		  if(JSON.stringify(JSONNew[newJson].key)+"" == "undefined"){
 		  JSONNew[newJson].key = guid();
 		  setModifiedBy(JSONNew[newJson]);
-		} else{
-
+		} else  if(JSON.stringify(JSONNew[newJson].key)+"" == "null") {
+		 var didNotFindMatch = false;
+           for(var old in JSONAudited){
+				if(JSON.stringify(JSONAudited[old]) +"" == JSON.stringify(JSONNew[newJson]) + ""){
+					JSONNew[newJson].key = guid();
+					didNotFindMatch = true;
+				}
+			  }
+			  if(didNotFindMatch){
+			   JSONNew[newJson].key = guid();
+		        setModifiedBy(JSONNew[newJson]);
+			  }
+			}else{
 	   for(var old in JSONAudited){
 			if(JSONAudited[old].key === JSONNew[newJson].key){
 				if(JSON.stringify(JSONAudited[old]) +"" != JSON.stringify(JSONNew[newJson]) + ""){
@@ -144,15 +155,3 @@ function formatAMPM(dateOriginal) {
   return strTime;
 }
     
-function log(varString){
-var logFile = companyhome.childByNamePath("log.txt");
-
-if (logFile == null)
-{
-   logFile = companyhome.createFile("log.txt");
-}
-if (logFile != null)
-   {
-     logFile.content +=  varString +"\n";
-   }
-}
